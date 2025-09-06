@@ -5,10 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:full": "concurrently \"npm run dev\" \"npm run dev:backend\"",
     "build": "vite build",
     "build:dev": "vite build --mode development",
+    "build:backend": "cd backend && npm run build",
+    "build:full": "npm run build && npm run build:backend",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start:backend": "cd backend && npm start"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

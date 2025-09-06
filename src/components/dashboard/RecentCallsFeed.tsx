@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Phone, Clock, User } from 'lucide-react';
+import { Phone, Clock, User, Loader2, AlertTriangle } from 'lucide-react';
+import { api, CallTranscript } from '../../lib/api';
 
-interface Call {
+// Interface for the display-formatted call data
+interface DisplayCall {
   id: string;
   customerName: string;
-  customerTier: 'Platinum' | 'Gold' | 'Basic';
+  customerTier: 'Platinum' | 'Gold' | 'Basic' | string;
   sentiment: 'positive' | 'negative' | 'neutral';
   duration: string;
   issue: string;
@@ -12,9 +14,10 @@ interface Call {
   agentName: string;
 }
 
-const CallCard: React.FC<{ call: Call }> = ({ call }) => {
+const CallCard: React.FC<{ call: DisplayCall }> = ({ call }) => {
   const getTierClass = (tier: string) => {
     switch (tier) {
+      case 'Premium':
       case 'Platinum': return 'tier-platinum';
       case 'Gold': return 'tier-gold';
       default: return 'tier-basic';
@@ -67,84 +70,113 @@ const CallCard: React.FC<{ call: Call }> = ({ call }) => {
 };
 
 export const RecentCallsFeed: React.FC = () => {
-  const [calls, setCalls] = useState<Call[]>([
-    {
-      id: '1',
-      customerName: 'Sarah Johnson',
-      customerTier: 'Platinum',
-      sentiment: 'positive',
-      duration: '12:34',
-      issue: 'Account balance inquiry resolved successfully',
-      timestamp: '2 min ago',
-      agentName: 'Alex Chen'
-    },
-    {
-      id: '2',
-      customerName: 'Michael Brown',
-      customerTier: 'Gold',
-      sentiment: 'negative',
-      duration: '18:22',
-      issue: 'Transaction dispute - requires follow-up',
-      timestamp: '5 min ago',
-      agentName: 'Emma Davis'
-    },
-    {
-      id: '3',
-      customerName: 'Lisa Wang',
-      customerTier: 'Basic',
-      sentiment: 'neutral',
-      duration: '8:15',
-      issue: 'Password reset assistance provided',
-      timestamp: '8 min ago',
-      agentName: 'James Wilson'
-    },
-    {
-      id: '4',
-      customerName: 'Robert Martinez',
-      customerTier: 'Platinum',
-      sentiment: 'positive',
-      duration: '15:45',
-      issue: 'Investment portfolio review completed',
-      timestamp: '12 min ago',
-      agentName: 'Sophie Lee'
-    },
-    {
-      id: '5',
-      customerName: 'Amanda Foster',
-      customerTier: 'Gold',
-      sentiment: 'negative',
-      duration: '22:18',
-      issue: 'Credit card fraud report - escalated',
-      timestamp: '15 min ago',
-      agentName: 'David Kim'
-    }
-  ]);
+  const [calls, setCalls] = useState<DisplayCall[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Simulate new calls coming in
+  // Convert API call transcript to display format
+  const mapTranscriptToDisplayCall = (transcript: CallTranscript): DisplayCall => {
+    // Map satisfaction score to sentiment
+    let sentiment: 'positive' | 'negative' | 'neutral';
+    if (transcript.overall_satisfaction_score >= 7) {
+      sentiment = 'positive';
+    } else if (transcript.overall_satisfaction_score <= 4) {
+      sentiment = 'negative';
+    } else {
+      sentiment = 'neutral';
+    }
+
+    // Format duration from minutes to MM:SS
+    const minutes = Math.floor(transcript.call_duration);
+    const seconds = Math.round((transcript.call_duration - minutes) * 60);
+    const duration = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+    // Format timestamp as relative time
+    const callDate = new Date(transcript.call_date_time);
+    const now = new Date();
+    const diffMs = now.getTime() - callDate.getTime();
+    const diffMins = Math.round(diffMs / 60000);
+    
+    let timestamp: string;
+    if (diffMins < 1) {
+      timestamp = 'Just now';
+    } else if (diffMins < 60) {
+      timestamp = `${diffMins} min ago`;
+    } else if (diffMins < 1440) {
+      const hours = Math.floor(diffMins / 60);
+      timestamp = `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    } else {
+      const days = Math.floor(diffMins / 1440);
+      timestamp = `${days} day${days > 1 ? 's' : ''} ago`;
+    }
+
+    return {
+      id: transcript.id?.toString() || Date.now().toString(),
+      customerName: transcript.customer_name,
+      customerTier: transcript.customer_tier,
+      sentiment,
+      duration,
+      issue: transcript.category_of_call,
+      timestamp,
+      agentName: transcript.support_agent_name
+    };
+  };
+
+  // Fetch recent calls from API
+  const fetchRecentCalls = async () => {
+    try {
+      setLoading(true);
+      // Get the 5 most recent calls
+      const response = await api.getAllTranscripts(
+        undefined, 
+        { page: 1, limit: 5 }
+      );
+      
+      // Map API data to display format
+      const displayCalls = response.transcripts.map(mapTranscriptToDisplayCall);
+      setCalls(displayCalls);
+      setError(null);
+    } catch (err) {
+      console.error('Error fetching recent calls:', err);
+      setError('Failed to load recent calls');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Initial data fetch
+  useEffect(() => {
+    fetchRecentCalls();
+  }, []);
+
+  // Periodic data refresh (every 30 seconds)
   useEffect(() => {
     const interval = setInterval(() => {
-      const newCall: Call = {
-        id: Date.now().toString(),
-        customerName: ['John Doe', 'Jane Smith', 'Mark Wilson', 'Emily Chen'][Math.floor(Math.random() * 4)],
-        customerTier: ['Platinum', 'Gold', 'Basic'][Math.floor(Math.random() * 3)] as any,
-        sentiment: ['positive', 'negative', 'neutral'][Math.floor(Math.random() * 3)] as any,
-        duration: `${Math.floor(Math.random() * 20) + 5}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
-        issue: [
-          'Account balance inquiry',
-          'Transaction dispute',
-          'Password reset assistance',
-          'Investment consultation',
-          'Credit card activation'
-        ][Math.floor(Math.random() * 5)],
-        timestamp: 'Just now',
-        agentName: ['Alex Chen', 'Emma Davis', 'James Wilson', 'Sophie Lee'][Math.floor(Math.random() * 4)]
-      };
-
-      setCalls(prev => [newCall, ...prev.slice(0, 4)]);
-    }, 8000);
+      fetchRecentCalls();
+    }, 30000);
 
     return () => clearInterval(interval);
   }, []);
+
+  // Loading state
+  if (loading && calls.length === 0) {
+    return (
+      <div className="glass rounded-xl p-6 flex flex-col items-center justify-center min-h-[300px]">
+        <Loader2 className="w-8 h-8 text-primary animate-spin mb-4" />
+        <p className="text-muted-foreground">Loading recent calls...</p>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error && calls.length === 0) {
+    return (
+      <div className="glass rounded-xl p-6 flex flex-col items-center justify-center min-h-[300px] text-red-500">
+        <AlertTriangle className="w-8 h-8 mb-4" />
+        <p>{error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="glass rounded-xl p-6">
@@ -156,10 +188,23 @@ export const RecentCallsFeed: React.FC = () => {
         </div>
       </div>
       
+      {loading && calls.length > 0 && (
+        <div className="flex items-center justify-center py-2 mb-4 text-xs text-primary">
+          <Loader2 className="w-3 h-3 animate-spin mr-2" />
+          Refreshing data...
+        </div>
+      )}
+      
       <div className="space-y-4 max-h-96 overflow-y-auto">
-        {calls.map((call) => (
-          <CallCard key={call.id} call={call} />
-        ))}
+        {calls.length > 0 ? (
+          calls.map((call) => (
+            <CallCard key={call.id} call={call} />
+          ))
+        ) : (
+          <div className="text-center py-8 text-muted-foreground">
+            No recent calls found
+          </div>
+        )}
       </div>
     </div>
   );
