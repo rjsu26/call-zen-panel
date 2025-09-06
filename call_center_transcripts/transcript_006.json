@@ -1,0 +1,18 @@
+{
+  "customer_name": "James Martinez",
+  "customer_unique_id": "CC567890123",
+  "support_agent_name": "Kelly Johnson",
+  "support_agent_id": "AGT_KJ_8901",
+  "call_transcript": "Agent: Good afternoon, thank you for calling SecureCard Customer Service. This is Kelly, how may I help you today?\n\nCustomer: Hi Kelly, I have a quick question about my payment. I made a payment online yesterday but I don't see it reflected in my available credit yet. I wanted to make sure it went through.\n\nAgent: I'll be happy to help you check on that payment, James. Let me verify your account first. Can you provide your full name and the last four digits of your card?\n\nCustomer: Sure, James Martinez, and the last four digits are 7890.\n\nAgent: Thank you. And can you confirm your zip code?\n\nCustomer: 33101.\n\nAgent: Perfect, I have your Basic tier account here. Now, what amount did you pay yesterday and around what time?\n\nCustomer: I paid $450 yesterday evening around 6 PM through your website.\n\nAgent: Let me check your recent payment activity... I can see your payment of $450 that was submitted yesterday at 6:17 PM. The good news is that it was successfully processed and cleared from your bank account.\n\nCustomer: Okay, so why isn't it showing in my available credit yet?\n\nAgent: Great question! Even though the payment has cleared, it can take 1-2 business days for the available credit to be updated on your account. Since you made the payment yesterday evening, it should be reflected in your available credit by tomorrow morning.\n\nCustomer: Oh, I see. So the payment definitely went through?\n\nAgent: Yes, absolutely. The payment was successful and has been applied to your account balance. Your new balance after this payment is $1,247.83, down from the previous balance of $1,697.83.\n\nCustomer: Perfect, that's exactly what I expected. Will I get a confirmation email about this payment?\n\nAgent: You should have received a payment confirmation email last night shortly after you made the payment. Let me check... yes, it was sent to your email address ending in @yahoo.com at 6:18 PM yesterday. If you don't see it, please check your spam folder.\n\nCustomer: I'll check when I get home. One more question - when is my next payment due?\n\nAgent: Your next payment of at least $62 is due on October 3rd. However, since you made this large payment, you're in great shape and well ahead of your due date.\n\nCustomer: Excellent. That's all I needed to know. Thanks for the quick help, Kelly.\n\nAgent: You're very welcome, James! I'm glad I could confirm everything is working correctly with your payment. Is there anything else I can assist you with today?\n\nCustomer: Nope, that covers it. Have a good day!\n\nAgent: You too! Thanks for calling SecureCard, and have a wonderful afternoon.\n\nCustomer: Thank you, bye!\n\nAgent: Goodbye!",
+  "overall_satisfaction_score": 9,
+  "category_of_call": "Payment Inquiry",
+  "call_duration": 6,
+  "call_date_time": "2025-09-06 14:10:00",
+  "call_resolution_status": "Resolved",
+  "escalation_level": "None",
+  "follow_up_required": "No",
+  "customer_tier": "Basic",
+  "issue_severity": "Low",
+  "agent_experience_level": "Junior",
+  "customer_previous_contact_count": 0
+}
