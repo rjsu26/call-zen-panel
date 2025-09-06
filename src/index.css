@@ -2,41 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Financial Analytics Dashboard Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Dark gradient backgrounds */
+    --background: 223 39% 7%;
+    --background-secondary: 223 47% 11%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Glassmorphism cards */
+    --glass: 223 39% 12%;
+    --glass-border: 193 100% 50%;
+    --glass-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Teal/Cyan accent system */
+    --primary: 193 100% 50%;
+    --primary-foreground: 223 39% 7%;
+    --primary-glow: 193 100% 65%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
+    /* Status colors */
+    --success: 142 76% 36%;
+    --success-foreground: 210 40% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 223 39% 7%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Semantic colors */
+    --muted: 223 39% 20%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 193 100% 50%;
+    --accent-foreground: 223 39% 7%;
 
-    --radius: 0.5rem;
+    /* UI elements */
+    --border: 223 39% 20%;
+    --input: 223 39% 15%;
+    --ring: 193 100% 50%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(223 39% 7%), hsl(223 47% 11%));
+    --gradient-glass: linear-gradient(135deg, hsl(223 39% 12% / 0.8), hsl(223 47% 15% / 0.6));
+    --gradient-accent: linear-gradient(135deg, hsl(193 100% 50%), hsl(193 100% 65%));
+
+    /* Shadows and effects */
+    --shadow-glass: 0 8px 32px 0 hsl(223 39% 7% / 0.37);
+    --shadow-glow: 0 0 20px hsl(193 100% 50% / 0.3);
+    --blur-glass: blur(12px);
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +115,73 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-primary);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* Glassmorphism effects */
+  .glass {
+    @apply backdrop-blur-xl border border-white/10;
+    background: var(--gradient-glass);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-hover {
+    @apply transition-all duration-300 hover:shadow-xl;
+    background: var(--gradient-glass);
+  }
+
+  .glass-hover:hover {
+    box-shadow: var(--shadow-glow);
+    border-color: hsl(var(--primary) / 0.3);
+  }
+
+  /* Pulse animations */
+  .pulse-primary {
+    @apply relative;
+  }
+
+  .pulse-primary::before {
+    content: '';
+    @apply absolute inset-0 rounded-full opacity-75 animate-ping;
+    background: hsl(var(--primary) / 0.4);
+  }
+
+  .pulse-success {
+    @apply relative;
+  }
+
+  .pulse-success::before {
+    content: '';
+    @apply absolute inset-0 rounded-full opacity-75 animate-ping;
+    background: hsl(var(--success) / 0.4);
+  }
+
+  /* Status indicators */
+  .status-positive {
+    @apply bg-success/20 text-success border border-success/30;
+  }
+
+  .status-negative {
+    @apply bg-destructive/20 text-destructive border border-destructive/30;
+  }
+
+  .status-neutral {
+    @apply bg-muted/20 text-muted-foreground border border-muted/30;
+  }
+
+  /* Customer tier badges */
+  .tier-platinum {
+    @apply bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 border border-purple-500/30;
+  }
+
+  .tier-gold {
+    @apply bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-300 border border-yellow-500/30;
+  }
+
+  .tier-basic {
+    @apply bg-muted/20 text-muted-foreground border border-muted/30;
   }
 }
