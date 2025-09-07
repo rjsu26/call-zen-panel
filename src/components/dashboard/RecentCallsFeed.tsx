@@ -1,20 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Phone, Clock, User, AlertTriangle } from 'lucide-react';
+import { Phone, Clock, User, Loader2, AlertTriangle } from 'lucide-react';
+import { api, CallTranscript } from '../../lib/api';
 
-interface Case {
+// Interface for the display-formatted call data
+interface DisplayCall {
   id: string;
   customerId: string;
   customerName: string;
+  customerTier: 'Platinum' | 'Gold' | 'Basic' | string;
+  sentiment: 'positive' | 'negative' | 'neutral';
+  duration: string;
+  issue: string;
+  timestamp: string;
   agentName: string;
   caseSummary: string;
-  sentiment: 'positive' | 'negative' | 'neutral';
   severity: 'High' | 'Medium' | 'Low';
-  timestamp: string;
 }
 
-const CaseCard: React.FC<{ case: Case }> = ({ case: caseData }) => {
+const CallCard: React.FC<{ call: DisplayCall }> = ({ call }) => {
   const navigate = useNavigate();
+
+  const getTierClass = (tier: string) => {
+    switch (tier) {
+      case 'Premium':
+      case 'Platinum': return 'tier-platinum';
+      case 'Gold': return 'tier-gold';
+      default: return 'tier-basic';
+    }
+  };
 
   const getSentimentColor = (sentiment: string) => {
     switch (sentiment) {
@@ -35,7 +49,7 @@ const CaseCard: React.FC<{ case: Case }> = ({ case: caseData }) => {
   return (
     <div
       className="glass glass-hover rounded-lg p-4 animate-slide-up cursor-pointer"
-      onClick={() => navigate(`/case/${caseData.id}`)}
+      onClick={() => navigate(`/case/${call.id}`)}
     >
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-3">
@@ -43,110 +57,186 @@ const CaseCard: React.FC<{ case: Case }> = ({ case: caseData }) => {
             <User className="w-5 h-5 text-primary" />
           </div>
           <div>
-            <h3 className="font-semibold text-foreground">{caseData.customerName}</h3>
-            <p className="text-xs text-muted-foreground">ID: {caseData.customerId}</p>
+            <h3 className="font-semibold text-foreground">{call.customerName}</h3>
+            <p className="text-xs text-muted-foreground">ID: {call.customerId}</p>
           </div>
         </div>
-        <div className={`text-xs px-2 py-1 rounded-full border ${getSentimentColor(caseData.sentiment)}`}>
-          {caseData.sentiment}
+        <div className={`text-xs px-2 py-1 rounded-full border ${getSentimentColor(call.sentiment)}`}>
+          {call.sentiment}
         </div>
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm text-muted-foreground line-clamp-2">{caseData.caseSummary}</p>
+        <p className="text-sm text-muted-foreground line-clamp-2">{call.caseSummary}</p>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
             <Phone className="w-3 h-3" />
-            {caseData.agentName}
+            {call.agentName}
           </div>
-          <div className={`text-xs px-2 py-1 rounded-full ${getSeverityColor(caseData.severity)}`}>
-            {caseData.severity}
+          <div className={`text-xs px-2 py-1 rounded-full ${getSeverityColor(call.severity)}`}>
+            {call.severity}
           </div>
         </div>
-        <div className="text-xs text-muted-foreground">{caseData.timestamp}</div>
+        <div className="text-xs text-muted-foreground">{call.timestamp}</div>
       </div>
     </div>
   );
 };
 
-export const CaseGallery: React.FC = () => {
-  const [cases, setCases] = useState<Case[]>([
-    {
-      id: '1',
-      customerId: 'CC789654321',
-      customerName: 'Sarah Mitchell',
-      agentName: 'Marcus Thompson',
-      caseSummary: 'Customer reported unauthorized charges on their credit card. Two unrecognized transactions totaling $217.49 were disputed.',
-      sentiment: 'positive',
-      severity: 'High',
-      timestamp: '2 hours ago'
-    },
-    {
-      id: '2',
-      customerId: 'CC123456789',
-      customerName: 'Emily Chen',
-      agentName: 'Alex Rivera',
-      caseSummary: 'App payment processing error preventing transactions for two consecutive days. Issue resolved with provisional credit.',
-      sentiment: 'negative',
-      severity: 'Medium',
-      timestamp: '4 hours ago'
-    },
-    {
-      id: '3',
-      customerId: 'CC987654321',
-      customerName: 'Michael Brown',
-      agentName: 'Emma Davis',
-      caseSummary: 'Website crash preventing online payments. Customer expressed urgency due to approaching deadline.',
-      sentiment: 'negative',
-      severity: 'High',
-      timestamp: '6 hours ago'
-    },
-    {
-      id: '4',
-      customerId: 'CC456789123',
-      customerName: 'Jennifer Liu',
-      agentName: 'James Wilson',
-      caseSummary: 'Inquiry about credit utilization and effective management strategies. Provided educational guidance.',
-      sentiment: 'positive',
-      severity: 'Low',
-      timestamp: '8 hours ago'
-    },
-    {
-      id: '5',
-      customerId: 'CC321654987',
-      customerName: 'Robert Martinez',
-      agentName: 'Sophie Lee',
-      caseSummary: 'Credit limit increase request approved. Customer satisfied with the outcome.',
-      sentiment: 'positive',
-      severity: 'Low',
-      timestamp: '10 hours ago'
-    }
-  ]);
+export const RecentCallsFeed: React.FC = () => {
+  const [calls, setCalls] = useState<DisplayCall[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Simulate new cases coming in
+  // Convert API call transcript to display format
+  const mapTranscriptToDisplayCall = (transcript: CallTranscript): DisplayCall => {
+    // Map satisfaction score to sentiment
+    let sentiment: 'positive' | 'negative' | 'neutral';
+    if (transcript.overall_satisfaction_score >= 7) {
+      sentiment = 'positive';
+    } else if (transcript.overall_satisfaction_score <= 4) {
+      sentiment = 'negative';
+    } else {
+      sentiment = 'neutral';
+    }
+
+    // Format duration from minutes to MM:SS
+    const minutes = Math.floor(transcript.call_duration);
+    const seconds = Math.round((transcript.call_duration - minutes) * 60);
+    const duration = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+    // Format timestamp as relative time
+    const callDate = new Date(transcript.call_date_time);
+    const now = new Date();
+    const diffMs = now.getTime() - callDate.getTime();
+    const diffMins = Math.round(diffMs / 60000);
+    
+    let timestamp: string;
+    if (diffMins < 1) {
+      timestamp = 'Just now';
+    } else if (diffMins < 60) {
+      timestamp = `${diffMins} min ago`;
+    } else if (diffMins < 1440) {
+      const hours = Math.floor(diffMins / 60);
+      timestamp = `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    } else {
+      const days = Math.floor(diffMins / 1440);
+      timestamp = `${days} day${days > 1 ? 's' : ''} ago`;
+    }
+
+    // Create case summary from transcript excerpt
+    const caseSummary = transcript.call_transcript
+      .split('\n')
+      .slice(4, 8) // Skip greeting lines, get issue description
+      .join(' ')
+      .replace(/Customer:|Agent:/g, '')
+      .trim()
+      .substring(0, 150) + '...';
+
+    return {
+      id: transcript.id?.toString() || Date.now().toString(),
+      customerId: transcript.customer_unique_id,
+      customerName: transcript.customer_name,
+      customerTier: transcript.customer_tier,
+      sentiment,
+      duration,
+      issue: transcript.category_of_call,
+      timestamp,
+      agentName: transcript.support_agent_name,
+      caseSummary,
+      severity: transcript.issue_severity as 'High' | 'Medium' | 'Low'
+    };
+  };
+
+  // Fetch recent calls from API
+  const fetchRecentCalls = async () => {
+    try {
+      setLoading(true);
+      // Get the 5 most recent calls
+      const response = await api.getAllTranscripts(
+        undefined, 
+        { page: 1, limit: 5 }
+      );
+      
+      // Map API data to display format
+      const displayCalls = response.transcripts.map(mapTranscriptToDisplayCall);
+      setCalls(displayCalls);
+      setError(null);
+    } catch (err) {
+      console.error('Error fetching recent calls:', err);
+      setError('Failed to load recent calls');
+      
+      // Fallback to mock data if API fails
+      const mockCalls: DisplayCall[] = [
+        {
+          id: '1',
+          customerId: 'CC789654321',
+          customerName: 'Sarah Mitchell',
+          customerTier: 'Premium',
+          agentName: 'Marcus Thompson',
+          caseSummary: 'Customer reported unauthorized charges on their credit card. Two unrecognized transactions totaling $217.49 were disputed.',
+          sentiment: 'positive',
+          severity: 'High',
+          timestamp: '2 hours ago',
+          duration: '12:34',
+          issue: 'Fraud Reporting'
+        },
+        {
+          id: '2',
+          customerId: 'CC123456789',
+          customerName: 'Emily Chen',
+          customerTier: 'Elite',
+          agentName: 'Alex Rivera',
+          caseSummary: 'App payment processing error preventing transactions for two consecutive days. Issue resolved with provisional credit.',
+          sentiment: 'negative',
+          severity: 'Medium',
+          timestamp: '4 hours ago',
+          duration: '18:15',
+          issue: 'Technical Support'
+        },
+        {
+          id: '3',
+          customerId: 'CC987654321',
+          customerName: 'Michael Brown',
+          customerTier: 'Premium',
+          agentName: 'Emma Davis',
+          caseSummary: 'Website crash preventing online payments. Customer expressed urgency due to approaching deadline.',
+          sentiment: 'negative',
+          severity: 'High',
+          timestamp: '6 hours ago',
+          duration: '16:42',
+          issue: 'System Technical Issue'
+        }
+      ];
+      setCalls(mockCalls);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Initial data fetch
+  useEffect(() => {
+    fetchRecentCalls();
+  }, []);
+
+  // Periodic data refresh (every 30 seconds)
   useEffect(() => {
     const interval = setInterval(() => {
-      const newCase: Case = {
-        id: Date.now().toString(),
-        customerId: `CC${Math.floor(Math.random() * 1000000000)}`,
-        customerName: ['John Doe', 'Jane Smith', 'Mark Wilson', 'Emily Chen'][Math.floor(Math.random() * 4)],
-        agentName: ['Alex Chen', 'Emma Davis', 'James Wilson', 'Sophie Lee'][Math.floor(Math.random() * 4)],
-        caseSummary: [
-          'Payment processing issue resolved',
-          'Account security concern addressed',
-          'Transaction dispute handled',
-          'Credit inquiry assistance provided'
-        ][Math.floor(Math.random() * 4)],
-        sentiment: ['positive', 'negative', 'neutral'][Math.floor(Math.random() * 3)] as any,
-        severity: ['High', 'Medium', 'Low'][Math.floor(Math.random() * 3)] as any,
-        timestamp: 'Just now'
-      };
-
-      setCases(prev => [newCase, ...prev.slice(0, 4)]);
-    }, 15000);
+      fetchRecentCalls();
+    }, 30000);
 
     return () => clearInterval(interval);
   }, []);
+
+  // Loading state
+  if (loading && calls.length === 0) {
+    return (
+      <div className="glass rounded-xl p-6 flex flex-col items-center justify-center min-h-[300px]">
+        <Loader2 className="w-8 h-8 text-primary animate-spin mb-4" />
+        <p className="text-muted-foreground">Loading recent calls...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="glass rounded-xl p-6">
@@ -158,10 +248,23 @@ export const CaseGallery: React.FC = () => {
         </div>
       </div>
       
+      {loading && calls.length > 0 && (
+        <div className="flex items-center justify-center py-2 mb-4 text-xs text-primary">
+          <Loader2 className="w-3 h-3 animate-spin mr-2" />
+          Refreshing data...
+        </div>
+      )}
+      
       <div className="space-y-4 max-h-96 overflow-y-auto">
-        {cases.map((caseData) => (
-          <CaseCard key={caseData.id} case={caseData} />
-        ))}
+        {calls.length > 0 ? (
+          calls.map((call) => (
+            <CallCard key={call.id} call={call} />
+          ))
+        ) : (
+          <div className="text-center py-8 text-muted-foreground">
+            No recent calls found
+          </div>
+        )}
       </div>
     </div>
   );
