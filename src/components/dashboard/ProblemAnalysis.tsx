@@ -8,11 +8,12 @@ const sentimentData = [
 ];
 
 const problemCategories = [
-  { category: 'Account Issues', count: 45, percentage: 30 },
-  { category: 'Transaction Disputes', count: 32, percentage: 21 },
-  { category: 'Technical Support', count: 28, percentage: 19 },
-  { category: 'Product Inquiries', count: 25, percentage: 17 },
-  { category: 'Billing Questions', count: 20, percentage: 13 }
+  { category: 'Payment Failures', count: 68, percentage: 28 },
+  { category: 'Account Access', count: 52, percentage: 21 },
+  { category: 'Fraud Reports', count: 43, percentage: 18 },
+  { category: 'Fee Disputes', count: 35, percentage: 14 },
+  { category: 'Card Issues', count: 28, percentage: 12 },
+  { category: 'App Problems', count: 17, percentage: 7 }
 ];
 
 const hourlyTrends = [
@@ -87,17 +88,92 @@ export const ProblemAnalysis: React.FC = () => {
 
       {/* Problem Categories */}
       <div className="glass rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-foreground mb-4">Problem Categories</h3>
-        <div className="h-64">
+        <h3 className="text-lg font-semibold text-foreground mb-4">Problem Categories Distribution</h3>
+        <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={problemCategories} layout="horizontal">
+            <BarChart data={problemCategories} margin={{ top: 20, right: 30, left: 40, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-              <XAxis type="number" stroke="hsl(var(--muted-foreground))" />
-              <YAxis dataKey="category" type="category" stroke="hsl(var(--muted-foreground))" width={120} />
+              <XAxis 
+                dataKey="category" 
+                stroke="hsl(var(--muted-foreground))" 
+                tick={{ fontSize: 12 }}
+                angle={-45}
+                textAnchor="end"
+                height={80}
+              />
+              <YAxis stroke="hsl(var(--muted-foreground))" />
               <Tooltip content={<CustomTooltip />} />
-              <Bar dataKey="count" fill="hsl(var(--primary))" radius={4} />
+              <Bar 
+                dataKey="count" 
+                fill="hsl(var(--primary))" 
+                radius={[4, 4, 0, 0]}
+                label={(props: any) => (
+                  <text 
+                    x={props.x + props.width / 2} 
+                    y={props.y - 5} 
+                    fill="hsl(var(--foreground))"
+                    textAnchor="middle" 
+                    fontSize={12}
+                    fontWeight="bold"
+                  >
+                    {props.value}
+                  </text>
+                )}
+              />
             </BarChart>
           </ResponsiveContainer>
+        </div>
+        <div className="mt-4 grid grid-cols-2 gap-4">
+          {problemCategories.map((category, index) => (
+            <div key={category.category} className="flex items-center justify-between p-2 glass-hover rounded">
+              <span className="text-sm text-foreground">{category.category}</span>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-bold text-primary">{category.count}</span>
+                <span className="text-xs text-muted-foreground">({category.percentage}%)</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* Alternative Line Chart View */}
+        <div className="mt-6 pt-6 border-t border-border">
+          <h4 className="text-md font-medium text-foreground mb-3">Trend View</h4>
+          <div className="h-48">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={problemCategories}>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                <XAxis 
+                  dataKey="category" 
+                  stroke="hsl(var(--muted-foreground))" 
+                  tick={{ fontSize: 10 }}
+                  angle={-45}
+                  textAnchor="end"
+                  height={60}
+                />
+                <YAxis stroke="hsl(var(--muted-foreground))" />
+                <Tooltip content={<CustomTooltip />} />
+                <Line 
+                  type="monotone" 
+                  dataKey="count" 
+                  stroke="hsl(var(--primary))" 
+                  strokeWidth={3}
+                  dot={{ fill: 'hsl(var(--primary))', strokeWidth: 2, r: 6 }}
+                  label={(props: any) => (
+                    <text 
+                      x={props.x} 
+                      y={props.y - 10} 
+                      fill="hsl(var(--foreground))"
+                      textAnchor="middle" 
+                      fontSize={11}
+                      fontWeight="bold"
+                    >
+                      {props.value}
+                    </text>
+                  )}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
         </div>
       </div>
 
