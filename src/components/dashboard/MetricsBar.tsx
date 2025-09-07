@@ -38,42 +38,14 @@ export const MetricsBar: React.FC = () => {
   const fetchDashboardStats = async () => {
     try {
       setLoading(true);
-      
-      // Use static mock data instead of API
-      const mockStats: DashboardStats = {
-        totalCalls: 1247,
-        averageSatisfactionScore: 8.2,
-        callsByCategory: [
-          { category: "Fraud Reporting", count: 23 },
-          { category: "Technical Support", count: 45 },
-          { category: "Account Inquiry", count: 78 }
-        ],
-        callsByResolution: [
-          { status: "Resolved", count: 892 },
-          { status: "Pending", count: 234 },
-          { status: "Escalated", count: 121 }
-        ],
-        callsByTier: [
-          { tier: "Premium", count: 423 },
-          { tier: "Gold", count: 567 },
-          { tier: "Basic", count: 257 }
-        ],
-        callsBySeverity: [
-          { severity: "High", count: 89 },
-          { severity: "Medium", count: 456 },
-          { severity: "Low", count: 702 }
-        ],
-        averageCallDuration: 14.5,
-        followUpRequiredCount: 23,
-        callTrends: []
-      };
-      
-      // Store previous stats for trend calculation
-      if (stats) {
-        setPreviousStats(stats);
-      }
-      
-      setStats(mockStats);
+
+      // Call backend API
+      const liveStats = await api.getDashboardStats();
+
+      // Persist previous stats for delta calculations
+      if (stats) setPreviousStats(stats);
+
+      setStats(liveStats);
       setError(null);
     } catch (err) {
       console.error('Error loading dashboard stats:', err);
