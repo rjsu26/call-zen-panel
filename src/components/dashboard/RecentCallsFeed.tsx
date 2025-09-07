@@ -3,6 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { Phone, Clock, User, Loader2, AlertTriangle } from 'lucide-react';
 import { api, CallTranscript } from '../../lib/api';
 
+// Interface for AI-generated case analysis
+interface CaseAnalysis {
+  id: string;
+  customerId: string;
+  customerName: string;
+  agentName: string;
+  caseSummary: string;
+  sentiment: 'positive' | 'negative' | 'neutral';
+  severity: 'High' | 'Medium' | 'Low';
+  timestamp: string;
+}
+
 // Interface for the display-formatted call data
 interface DisplayCall {
   id: string;
@@ -87,17 +99,44 @@ export const RecentCallsFeed: React.FC = () => {
   const [calls, setCalls] = useState<DisplayCall[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [caseAnalyses, setCaseAnalyses] = useState<CaseAnalysis[]>([]);
 
-  // Convert API call transcript to display format
-  const mapTranscriptToDisplayCall = (transcript: CallTranscript): DisplayCall => {
-    // Map satisfaction score to sentiment
+  // Load AI-generated case analyses
+  const loadCaseAnalyses = async (): Promise<CaseAnalysis[]> => {
+    try {
+      const response = await fetch('/case_analyses.json');
+      if (!response.ok) {
+        console.warn('Could not load case analyses, falling back to empty array');
+        return [];
+      }
+      return await response.json();
+    } catch (error) {
+      console.warn('Error loading case analyses:', error);
+      return [];
+    }
+  };
+
+  // Convert API call transcript to display format using AI analysis when available
+  const mapTranscriptToDisplayCall = (transcript: CallTranscript, analyses: CaseAnalysis[]): DisplayCall => {
+    // Find matching AI analysis by transcript ID or customer ID
+    const transcriptIdStr = transcript.id?.toString();
+    const aiAnalysis = analyses.find(analysis => 
+      analysis.id === transcriptIdStr || 
+      analysis.customerId === transcript.customer_unique_id
+    );
+
+    // Map satisfaction score to sentiment (fallback if no AI analysis)
     let sentiment: 'positive' | 'negative' | 'neutral';
-    if (transcript.overall_satisfaction_score >= 7) {
-      sentiment = 'positive';
-    } else if (transcript.overall_satisfaction_score <= 4) {
-      sentiment = 'negative';
+    if (aiAnalysis) {
+      sentiment = aiAnalysis.sentiment;
     } else {
-      sentiment = 'neutral';
+      if (transcript.overall_satisfaction_score >= 7) {
+        sentiment = 'positive';
+      } else if (transcript.overall_satisfaction_score <= 4) {
+        sentiment = 'negative';
+      } else {
+        sentiment = 'neutral';
+      }
     }
 
     // Format duration from minutes to MM:SS
@@ -124,14 +163,20 @@ export const RecentCallsFeed: React.FC = () => {
       timestamp = `${days} day${days > 1 ? 's' : ''} ago`;
     }
 
-    // Create case summary from transcript excerpt
-    const caseSummary = transcript.call_transcript
-      .split('\n')
-      .slice(4, 8) // Skip greeting lines, get issue description
-      .join(' ')
-      .replace(/Customer:|Agent:/g, '')
-      .trim()
-      .substring(0, 150) + '...';
+    // Use AI-generated case summary if available, otherwise create one from transcript
+    let caseSummary: string;
+    if (aiAnalysis && aiAnalysis.caseSummary) {
+      caseSummary = aiAnalysis.caseSummary;
+    } else {
+      // Fallback: create case summary from transcript excerpt
+      caseSummary = transcript.call_transcript
+        .split('\n')
+        .slice(4, 8) // Skip greeting lines, get issue description
+        .join(' ')
+        .replace(/Customer:|Agent:/g, '')
+        .trim()
+        .substring(0, 150) + '...';
+    }
 
     return {
       id: transcript.id?.toString() || Date.now().toString(),
@@ -144,7 +189,7 @@ export const RecentCallsFeed: React.FC = () => {
       timestamp,
       agentName: transcript.support_agent_name,
       caseSummary,
-      severity: transcript.issue_severity as 'High' | 'Medium' | 'Low'
+      severity: (aiAnalysis?.severity || transcript.issue_severity) as 'High' | 'Medium' | 'Low'
     };
   };
 
@@ -152,14 +197,19 @@ export const RecentCallsFeed: React.FC = () => {
   const fetchRecentCalls = async () => {
     try {
       setLoading(true);
-      // Get the 5 most recent calls
-      const response = await api.getAllTranscripts(
-        undefined, 
-        { page: 1, limit: 5 }
-      );
       
-      // Map API data to display format
-      const displayCalls = response.transcripts.map(mapTranscriptToDisplayCall);
+      // Load case analyses and recent calls in parallel
+      const [analyses, response] = await Promise.all([
+        loadCaseAnalyses(),
+        api.getAllTranscripts(undefined, { page: 1, limit: 5 })
+      ]);
+      
+      setCaseAnalyses(analyses);
+      
+      // Map API data to display format using AI analyses
+      const displayCalls = response.transcripts.map(transcript => 
+        mapTranscriptToDisplayCall(transcript, analyses)
+      );
       setCalls(displayCalls);
       setError(null);
     } catch (err) {
