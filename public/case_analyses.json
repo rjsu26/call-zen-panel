@@ -1,52 +1,42 @@
 [
   {
-    "id": "CASE-001",
-    "customerId": "CUST-1001",
-    "customerName": "Priya Sharma",
-    "agentName": "Ravi K.",
-    "caseSummary": "Customer reported multiple failed payment attempts on the mobile app and was charged a late fee despite the system showing a pending transaction. Customer is requesting reversal of fees and urgent correction to avoid service interruption.",
-    "sentiment": "Negative",
+    "id": "001",
+    "customerId": "CC789654321",
+    "customerName": "Sarah Mitchell",
+    "agentName": "Marcus Thompson",
+    "caseSummary": "Customer reported unauthorized charges totaling $217.49 from unknown merchants. Immediate card block and fraud dispute initiated with provisional credit within 24 hours. New expedited card issued.",
+    "sentiment": "positive",
     "severity": "High",
-    "timestamp": "2025-09-05T10:24:00Z"
+    "timestamp": "2025-09-06T14:32:00Z"
   },
   {
-    "id": "CASE-002",
-    "customerId": "CUST-1002",
-    "customerName": "Liam O'Connor",
-    "agentName": "Sara P.",
-    "caseSummary": "Customer expressed frustration about unclear refund timelines for a disputed charge and asked when provisional credit would appear. Agent explained process but customer requests escalation.",
-    "sentiment": "Neutral",
-    "severity": "Medium",
-    "timestamp": "2025-09-04T15:12:00Z"
-  },
-  {
-    "id": "CASE-003",
-    "customerId": "CUST-1003",
-    "customerName": "Chen Wei",
-    "agentName": "Maya L.",
-    "caseSummary": "Customer reported that an agent read full card digits aloud during the call; customer concerned about data exposure and requests incident review.",
-    "sentiment": "Negative",
-    "severity": "High",
-    "timestamp": "2025-09-03T09:05:00Z"
-  },
-  {
-    "id": "CASE-004",
-    "customerId": "CUST-1004",
-    "customerName": "Aisha Khan",
-    "agentName": "Tom B.",
-    "caseSummary": "Customer called to update account details but agent did not request required ID verification; customer worried about unauthorized changes.",
-    "sentiment": "Negative",
-    "severity": "High",
-    "timestamp": "2025-09-02T11:30:00Z"
-  },
-  {
-    "id": "CASE-005",
-    "customerId": "CUST-1005",
-    "customerName": "Carlos Mendes",
-    "agentName": "Nina R.",
-    "caseSummary": "Customer praised support for quick resolution of a billing confusion; no follow-up required.",
-    "sentiment": "Positive",
+    "id": "002",
+    "customerId": "CC456789012",
+    "customerName": "David Rodriguez",
+    "agentName": "Jennifer Lee",
+    "caseSummary": "Customer requested credit limit increase from $3,500. With improved income and excellent payment history, approved for increase to $6,500. Premium tier upgrade information provided.",
+    "sentiment": "positive",
     "severity": "Low",
-    "timestamp": "2025-09-01T08:45:00Z"
+    "timestamp": "2025-09-06T10:15:00Z"
+  },
+  {
+    "id": "003",
+    "customerId": "CC234567890",
+    "customerName": "Emily Chen",
+    "agentName": "Robert Kim",
+    "caseSummary": "Elite member experiencing mobile app payment failures for 2 days. Urgent payment of $2,847.50 processed via phone. App bug affecting iOS Elite users identified, fix pending 5-7 days. $25 credit applied.",
+    "sentiment": "neutral",
+    "severity": "Medium",
+    "timestamp": "2025-09-06T15:42:00Z"
+  },
+  {
+    "id": "012",
+    "customerId": "CC123456789",
+    "customerName": "Maria Gonzalez",
+    "agentName": "Brandon Lewis",
+    "caseSummary": "Customer concerned about PIN security after someone stood too close at ATM. Proactive PIN reset completed over phone with security guidelines provided. Account activity verified as normal.",
+    "sentiment": "positive",
+    "severity": "Medium",
+    "timestamp": "2025-09-06T09:30:00Z"
   }
 ]

@@ -118,12 +118,25 @@ export const RecentCallsFeed: React.FC = () => {
 
   // Convert API call transcript to display format using AI analysis when available
   const mapTranscriptToDisplayCall = (transcript: CallTranscript, analyses: CaseAnalysis[]): DisplayCall => {
-    // Find matching AI analysis by transcript ID or customer ID
+    // Find matching AI analysis by multiple strategies
     const transcriptIdStr = transcript.id?.toString();
-    const aiAnalysis = analyses.find(analysis => 
-      analysis.id === transcriptIdStr || 
-      analysis.customerId === transcript.customer_unique_id
-    );
+    const paddedId = transcriptIdStr ? transcriptIdStr.padStart(3, '0') : '';
+    
+    const aiAnalysis = analyses.find(analysis => {
+      // Try exact ID match first
+      if (analysis.id === transcriptIdStr) return true;
+      
+      // Try matching with "CASE-" prefix and padded number
+      if (analysis.id === `CASE-${paddedId}`) return true;
+      
+      // Try customer ID match
+      if (analysis.customerId === transcript.customer_unique_id) return true;
+      
+      // Try customer name match (case insensitive)
+      if (analysis.customerName?.toLowerCase() === transcript.customer_name?.toLowerCase()) return true;
+      
+      return false;
+    });
 
     // Map satisfaction score to sentiment (fallback if no AI analysis)
     let sentiment: 'positive' | 'negative' | 'neutral';
