@@ -289,7 +289,10 @@ function insertTranscript(db, transcript) {
       'customer_previous_contact_count'
     ];
     
-    const missingFields = requiredFields.filter(field => !transcript[field]);
+    // Treat undefined, null, or empty string as missing. Allow 0 / false.
+    const missingFields = requiredFields.filter(field => (
+      transcript[field] === undefined || transcript[field] === null || transcript[field] === ''
+    ));
     
     if (missingFields.length > 0) {
       reject(new Error(`Missing required fields: ${missingFields.join(', ')}`));

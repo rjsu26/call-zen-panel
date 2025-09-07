@@ -1,8 +1,11 @@
 /**
  * Base URL for the backend API
- * In production, this might be a relative URL or a full domain
+ * In production, use relative URL to work with Vite proxy
+ * In development, use full URL to backend server
  */
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
+const API_BASE_URL = import.meta.env.PROD 
+  ? '/api' 
+  : (import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api');
 
 /**
  * Interface for API error responses
