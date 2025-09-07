@@ -78,6 +78,33 @@ export const initializeDatabase = async (): Promise<void> => {
     await createIndex(db, 'call_transcripts', 'support_agent_id');
     await createIndex(db, 'call_transcripts', 'call_date_time');
     await createIndex(db, 'call_transcripts', 'category_of_call');
+
+    // ------------------------------------------------------------------
+    // Prevent duplicate transcripts
+    // ------------------------------------------------------------------
+    // We consider a transcript duplicate if the same customer, agent and
+    // call date‐time combination already exists.  A composite UNIQUE
+    // index guarantees this at the database layer. If the project was
+    // run before this constraint existed, the statement below will still
+    // succeed thanks to `IF NOT EXISTS`.
+    //
+    //  customer_unique_id + call_date_time + support_agent_id  -> UNIQUE
+    //
+    await new Promise<void>((resolve, reject) => {
+      db.run(
+        `CREATE UNIQUE INDEX IF NOT EXISTS ux_call_transcripts_unique_call
+         ON call_transcripts (customer_unique_id, call_date_time, support_agent_id)`,
+        (err: Error | null) => {
+          if (err) {
+            console.error('Error creating unique index (duplicate prevention):', err.message);
+            reject(err);
+          } else {
+            console.log('Unique index created (duplicate prevention in place)');
+            resolve();
+          }
+        }
+      );
+    });
     
     // Close the database connection
     await closeDbConnection(db);

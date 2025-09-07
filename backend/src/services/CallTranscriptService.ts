@@ -86,7 +86,33 @@ export class CallTranscriptService {
    */
   async createCallTranscript(transcriptData: CreateCallTranscriptDto): Promise<CallTranscript> {
     try {
-      // Validate the transcript data
+      // ------------------------------------------------------------------
+      // 1. Duplicate-prevention check
+      // ------------------------------------------------------------------
+      // A transcript is considered duplicate if the same customer,
+      // agent and call date-time combination already exists.
+      const duplicateCheckSql = `
+        SELECT id 
+        FROM call_transcripts
+        WHERE customer_unique_id = ?
+          AND call_date_time     = ?
+          AND support_agent_id   = ?
+        LIMIT 1
+      `;
+      const duplicate = await executeQuery<{ id: number }>(duplicateCheckSql, [
+        transcriptData.customer_unique_id,
+        transcriptData.call_date_time,
+        transcriptData.support_agent_id
+      ]);
+
+      if (duplicate.length > 0) {
+        // Duplicate found – abort insertion
+        throw new Error('Duplicate call transcript detected');
+      }
+
+      // ------------------------------------------------------------------
+      // 2. Validate the transcript data (existing validation logic)
+      // ------------------------------------------------------------------
       this.validateTranscriptData(transcriptData);
 
       const columns = Object.keys(transcriptData).join(', ');
@@ -94,7 +120,17 @@ export class CallTranscriptService {
       const values = Object.values(transcriptData);
 
       const sql = `INSERT INTO call_transcripts (${columns}) VALUES (${placeholders})`;
-      const result = await executeStatement(sql, values);
+      let result;
+      try {
+        result = await executeStatement(sql, values);
+      } catch (err: any) {
+        // Handle UNIQUE constraint violation at SQLite level
+        // (e.g., if the composite unique index blocked the insert)
+        if (err.message && err.message.includes('SQLITE_CONSTRAINT')) {
+          throw new Error('Duplicate call transcript detected');
+        }
+        throw err;
+      }
 
       // Retrieve the newly created record
       return this.getCallTranscriptById(result.lastID);
