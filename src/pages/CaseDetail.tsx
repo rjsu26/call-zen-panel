@@ -1,29 +1,171 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, User, Phone, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, User, Phone, AlertTriangle, Loader2 } from 'lucide-react';
+import { api, CallTranscript } from '../lib/api';
 
 interface CaseDetailProps {
   caseId: string;
   customerId: string;
+  customerName: string;
   agentName: string;
   caseSummary: string;
   severity: string;
   sentiment: 'positive' | 'negative' | 'neutral';
+  fullTranscript: string;
+  duration: string;
+  timestamp: string;
+  category: string;
 }
 
 const CaseDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const [caseData, setCaseData] = useState<CaseDetailProps | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Mock data - in real app, fetch from API or state
-  const caseData: CaseDetailProps = {
-    caseId: id || '1',
-    customerId: 'CC789654321',
-    agentName: 'Marcus Thompson',
-    caseSummary: 'Customer reported unauthorized charges on their credit card. Two unrecognized transactions totaling $217.49 were disputed. Provisional credit issued within 24 hours, new card expedited.',
-    severity: 'High',
-    sentiment: 'positive'
+  // Convert API call transcript to display format (same as RecentCallsFeed)
+  const mapTranscriptToDisplayCase = (transcript: CallTranscript): CaseDetailProps => {
+    // Map satisfaction score to sentiment
+    let sentiment: 'positive' | 'negative' | 'neutral';
+    if (transcript.overall_satisfaction_score >= 7) {
+      sentiment = 'positive';
+    } else if (transcript.overall_satisfaction_score <= 4) {
+      sentiment = 'negative';
+    } else {
+      sentiment = 'neutral';
+    }
+
+    // Format duration from minutes to MM:SS
+    const minutes = Math.floor(transcript.call_duration);
+    const seconds = Math.round((transcript.call_duration - minutes) * 60);
+    const duration = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+    // Format timestamp as relative time
+    const callDate = new Date(transcript.call_date_time);
+    const now = new Date();
+    const diffMs = now.getTime() - callDate.getTime();
+    const diffMins = Math.round(diffMs / 60000);
+    
+    let timestamp: string;
+    if (diffMins < 1) {
+      timestamp = 'Just now';
+    } else if (diffMins < 60) {
+      timestamp = `${diffMins} min ago`;
+    } else if (diffMins < 1440) {
+      const hours = Math.floor(diffMins / 60);
+      timestamp = `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    } else {
+      const days = Math.floor(diffMins / 1440);
+      timestamp = `${days} day${days > 1 ? 's' : ''} ago`;
+    }
+
+    // Create case summary from transcript excerpt (same logic as RecentCallsFeed)
+    const caseSummary = transcript.call_transcript
+      .split('\n')
+      .slice(4, 8) // Skip greeting lines, get issue description
+      .join(' ')
+      .replace(/Customer:|Agent:/g, '')
+      .trim()
+      .substring(0, 150) + '...';
+
+    return {
+      caseId: transcript.id?.toString() || id || '1',
+      customerId: transcript.customer_unique_id,
+      customerName: transcript.customer_name,
+      agentName: transcript.support_agent_name,
+      caseSummary,
+      severity: transcript.issue_severity as 'High' | 'Medium' | 'Low',
+      sentiment,
+      fullTranscript: transcript.call_transcript,
+      duration,
+      timestamp,
+      category: transcript.category_of_call
+    };
   };
+
+  // Fetch case data from API
+  const fetchCaseData = async () => {
+    if (!id) {
+      setError('No case ID provided');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await api.getTranscriptById(parseInt(id));
+      const displayCase = mapTranscriptToDisplayCase(response);
+      setCaseData(displayCase);
+      setError(null);
+    } catch (err) {
+      console.error('Error fetching case data:', err);
+      setError('Failed to load case data');
+      
+      // Fallback to mock data if API fails
+      const mockCase: CaseDetailProps = {
+        caseId: id || '1',
+        customerId: 'CC789654321',
+        customerName: 'Sarah Mitchell',
+        agentName: 'Marcus Thompson',
+        caseSummary: 'Customer reported unauthorized charges on their credit card. Two unrecognized transactions totaling $217.49 were disputed.',
+        severity: 'High',
+        sentiment: 'positive',
+        fullTranscript: 'Customer: Hi, I need to report some unauthorized charges on my credit card.\nAgent: I\'m sorry to hear that. I\'ll help you resolve this right away. Can you tell me more about the charges?\nCustomer: There are two transactions I don\'t recognize, totaling $217.49.\nAgent: I understand your concern. Let me flag these transactions for dispute immediately...',
+        duration: '12:34',
+        timestamp: '2 hours ago',
+        category: 'Fraud Reporting'
+      };
+      setCaseData(mockCase);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCaseData();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background p-6">
+        <div className="max-w-4xl mx-auto">
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Case Gallery
+          </button>
+          
+          <div className="glass rounded-xl p-6 flex flex-col items-center justify-center min-h-[400px]">
+            <Loader2 className="w-8 h-8 text-primary animate-spin mb-4" />
+            <p className="text-muted-foreground">Loading case details...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !caseData) {
+    return (
+      <div className="min-h-screen bg-background p-6">
+        <div className="max-w-4xl mx-auto">
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Case Gallery
+          </button>
+          
+          <div className="glass rounded-xl p-6 text-center">
+            <p className="text-destructive">Error: {error || 'Case not found'}</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const getSentimentColor = (sentiment: string) => {
     switch (sentiment) {
@@ -65,8 +207,16 @@ const CaseDetail: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <User className="w-5 h-5 text-primary" />
+                <div>
+                  <p className="text-sm text-muted-foreground">Customer Name</p>
+                  <p className="font-semibold">{caseData.customerName}</p>
+                </div>
+              </div>
+
               <div className="flex items-center gap-3">
                 <User className="w-5 h-5 text-primary" />
                 <div>
@@ -92,9 +242,37 @@ const CaseDetail: React.FC = () => {
               </div>
             </div>
 
+            <div className="space-y-4">
+              <div>
+                <p className="text-sm text-muted-foreground">Category</p>
+                <p className="font-semibold">{caseData.category}</p>
+              </div>
+
+              <div>
+                <p className="text-sm text-muted-foreground">Duration</p>
+                <p className="font-semibold">{caseData.duration}</p>
+              </div>
+
+              <div>
+                <p className="text-sm text-muted-foreground">Time</p>
+                <p className="font-semibold">{caseData.timestamp}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-6">
             <div>
               <h3 className="text-lg font-semibold mb-3">Case Summary</h3>
               <p className="text-muted-foreground leading-relaxed">{caseData.caseSummary}</p>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold mb-3">Full Transcript</h3>
+              <div className="glass rounded-lg p-4 max-h-96 overflow-y-auto">
+                <pre className="text-sm text-muted-foreground whitespace-pre-wrap font-mono leading-relaxed">
+                  {caseData.fullTranscript}
+                </pre>
+              </div>
             </div>
           </div>
         </div>

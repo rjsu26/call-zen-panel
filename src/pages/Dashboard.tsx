@@ -5,8 +5,10 @@ import { ProblemAnalysis } from '@/components/dashboard/ProblemAnalysis';
 import { AIInsights } from '@/components/dashboard/AIInsights';
 
 export const Dashboard: React.FC = () => {
+  console.log('Dashboard component rendering');
+  
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-6 bg-background text-foreground">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-foreground mb-2">
