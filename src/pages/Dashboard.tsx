@@ -1,6 +1,6 @@
 import React from 'react';
 import { MetricsBar } from '@/components/dashboard/MetricsBar';
-import { RecentCallsFeed } from '@/components/dashboard/RecentCallsFeed';
+import { CaseGallery } from '@/components/dashboard/RecentCallsFeed';
 import { ProblemAnalysis } from '@/components/dashboard/ProblemAnalysis';
 import { AIInsights } from '@/components/dashboard/AIInsights';
 
@@ -22,9 +22,9 @@ export const Dashboard: React.FC = () => {
 
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Recent Calls Feed - Left Column */}
+        {/* Case Gallery - Left Column */}
         <div className="lg:col-span-1">
-          <RecentCallsFeed />
+          <CaseGallery />
         </div>
 
         {/* Problem Analysis - Center Columns */}

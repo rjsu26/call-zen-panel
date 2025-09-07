@@ -1,147 +1,149 @@
 import React, { useEffect, useState } from 'react';
-import { Phone, Clock, User } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Phone, Clock, User, AlertTriangle } from 'lucide-react';
 
-interface Call {
+interface Case {
   id: string;
+  customerId: string;
   customerName: string;
-  customerTier: 'Platinum' | 'Gold' | 'Basic';
-  sentiment: 'positive' | 'negative' | 'neutral';
-  duration: string;
-  issue: string;
-  timestamp: string;
   agentName: string;
+  caseSummary: string;
+  sentiment: 'positive' | 'negative' | 'neutral';
+  severity: 'High' | 'Medium' | 'Low';
+  timestamp: string;
 }
 
-const CallCard: React.FC<{ call: Call }> = ({ call }) => {
-  const getTierClass = (tier: string) => {
-    switch (tier) {
-      case 'Platinum': return 'tier-platinum';
-      case 'Gold': return 'tier-gold';
-      default: return 'tier-basic';
+const CaseCard: React.FC<{ case: Case }> = ({ case: caseData }) => {
+  const navigate = useNavigate();
+
+  const getSentimentColor = (sentiment: string) => {
+    switch (sentiment) {
+      case 'positive': return 'bg-green-100 text-green-800 border-green-200';
+      case 'negative': return 'bg-red-100 text-red-800 border-red-200';
+      default: return 'bg-yellow-100 text-yellow-800 border-yellow-200';
     }
   };
 
-  const getSentimentClass = (sentiment: string) => {
-    switch (sentiment) {
-      case 'positive': return 'status-positive';
-      case 'negative': return 'status-negative';
-      default: return 'status-neutral';
+  const getSeverityColor = (severity: string) => {
+    switch (severity.toLowerCase()) {
+      case 'high': return 'bg-red-100 text-red-800';
+      case 'medium': return 'bg-yellow-100 text-yellow-800';
+      default: return 'bg-green-100 text-green-800';
     }
   };
 
   return (
-    <div className="glass glass-hover rounded-lg p-4 animate-slide-up">
+    <div
+      className="glass glass-hover rounded-lg p-4 animate-slide-up cursor-pointer"
+      onClick={() => navigate(`/case/${caseData.id}`)}
+    >
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
             <User className="w-5 h-5 text-primary" />
           </div>
           <div>
-            <h3 className="font-semibold text-foreground">{call.customerName}</h3>
-            <span className={`text-xs px-2 py-1 rounded-full ${getTierClass(call.customerTier)}`}>
-              {call.customerTier}
-            </span>
+            <h3 className="font-semibold text-foreground">{caseData.customerName}</h3>
+            <p className="text-xs text-muted-foreground">ID: {caseData.customerId}</p>
           </div>
         </div>
-        <div className={`text-xs px-2 py-1 rounded-full ${getSentimentClass(call.sentiment)}`}>
-          {call.sentiment}
+        <div className={`text-xs px-2 py-1 rounded-full border ${getSentimentColor(caseData.sentiment)}`}>
+          {caseData.sentiment}
         </div>
       </div>
-      
+
       <div className="space-y-2">
-        <p className="text-sm text-muted-foreground">{call.issue}</p>
-        <div className="flex items-center gap-4 text-xs text-muted-foreground">
-          <div className="flex items-center gap-1">
+        <p className="text-sm text-muted-foreground line-clamp-2">{caseData.caseSummary}</p>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-1 text-xs text-muted-foreground">
             <Phone className="w-3 h-3" />
-            {call.agentName}
+            {caseData.agentName}
           </div>
-          <div className="flex items-center gap-1">
-            <Clock className="w-3 h-3" />
-            {call.duration}
+          <div className={`text-xs px-2 py-1 rounded-full ${getSeverityColor(caseData.severity)}`}>
+            {caseData.severity}
           </div>
-          <span>{call.timestamp}</span>
         </div>
+        <div className="text-xs text-muted-foreground">{caseData.timestamp}</div>
       </div>
     </div>
   );
 };
 
-export const RecentCallsFeed: React.FC = () => {
-  const [calls, setCalls] = useState<Call[]>([
+export const CaseGallery: React.FC = () => {
+  const [cases, setCases] = useState<Case[]>([
     {
       id: '1',
-      customerName: 'Sarah Johnson',
-      customerTier: 'Platinum',
+      customerId: 'CC789654321',
+      customerName: 'Sarah Mitchell',
+      agentName: 'Marcus Thompson',
+      caseSummary: 'Customer reported unauthorized charges on their credit card. Two unrecognized transactions totaling $217.49 were disputed.',
       sentiment: 'positive',
-      duration: '12:34',
-      issue: 'Account balance inquiry resolved successfully',
-      timestamp: '2 min ago',
-      agentName: 'Alex Chen'
+      severity: 'High',
+      timestamp: '2 hours ago'
     },
     {
       id: '2',
-      customerName: 'Michael Brown',
-      customerTier: 'Gold',
+      customerId: 'CC123456789',
+      customerName: 'Emily Chen',
+      agentName: 'Alex Rivera',
+      caseSummary: 'App payment processing error preventing transactions for two consecutive days. Issue resolved with provisional credit.',
       sentiment: 'negative',
-      duration: '18:22',
-      issue: 'Transaction dispute - requires follow-up',
-      timestamp: '5 min ago',
-      agentName: 'Emma Davis'
+      severity: 'Medium',
+      timestamp: '4 hours ago'
     },
     {
       id: '3',
-      customerName: 'Lisa Wang',
-      customerTier: 'Basic',
-      sentiment: 'neutral',
-      duration: '8:15',
-      issue: 'Password reset assistance provided',
-      timestamp: '8 min ago',
-      agentName: 'James Wilson'
+      customerId: 'CC987654321',
+      customerName: 'Michael Brown',
+      agentName: 'Emma Davis',
+      caseSummary: 'Website crash preventing online payments. Customer expressed urgency due to approaching deadline.',
+      sentiment: 'negative',
+      severity: 'High',
+      timestamp: '6 hours ago'
     },
     {
       id: '4',
-      customerName: 'Robert Martinez',
-      customerTier: 'Platinum',
+      customerId: 'CC456789123',
+      customerName: 'Jennifer Liu',
+      agentName: 'James Wilson',
+      caseSummary: 'Inquiry about credit utilization and effective management strategies. Provided educational guidance.',
       sentiment: 'positive',
-      duration: '15:45',
-      issue: 'Investment portfolio review completed',
-      timestamp: '12 min ago',
-      agentName: 'Sophie Lee'
+      severity: 'Low',
+      timestamp: '8 hours ago'
     },
     {
       id: '5',
-      customerName: 'Amanda Foster',
-      customerTier: 'Gold',
-      sentiment: 'negative',
-      duration: '22:18',
-      issue: 'Credit card fraud report - escalated',
-      timestamp: '15 min ago',
-      agentName: 'David Kim'
+      customerId: 'CC321654987',
+      customerName: 'Robert Martinez',
+      agentName: 'Sophie Lee',
+      caseSummary: 'Credit limit increase request approved. Customer satisfied with the outcome.',
+      sentiment: 'positive',
+      severity: 'Low',
+      timestamp: '10 hours ago'
     }
   ]);
 
-  // Simulate new calls coming in
+  // Simulate new cases coming in
   useEffect(() => {
     const interval = setInterval(() => {
-      const newCall: Call = {
+      const newCase: Case = {
         id: Date.now().toString(),
+        customerId: `CC${Math.floor(Math.random() * 1000000000)}`,
         customerName: ['John Doe', 'Jane Smith', 'Mark Wilson', 'Emily Chen'][Math.floor(Math.random() * 4)],
-        customerTier: ['Platinum', 'Gold', 'Basic'][Math.floor(Math.random() * 3)] as any,
+        agentName: ['Alex Chen', 'Emma Davis', 'James Wilson', 'Sophie Lee'][Math.floor(Math.random() * 4)],
+        caseSummary: [
+          'Payment processing issue resolved',
+          'Account security concern addressed',
+          'Transaction dispute handled',
+          'Credit inquiry assistance provided'
+        ][Math.floor(Math.random() * 4)],
         sentiment: ['positive', 'negative', 'neutral'][Math.floor(Math.random() * 3)] as any,
-        duration: `${Math.floor(Math.random() * 20) + 5}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
-        issue: [
-          'Account balance inquiry',
-          'Transaction dispute',
-          'Password reset assistance',
-          'Investment consultation',
-          'Credit card activation'
-        ][Math.floor(Math.random() * 5)],
-        timestamp: 'Just now',
-        agentName: ['Alex Chen', 'Emma Davis', 'James Wilson', 'Sophie Lee'][Math.floor(Math.random() * 4)]
+        severity: ['High', 'Medium', 'Low'][Math.floor(Math.random() * 3)] as any,
+        timestamp: 'Just now'
       };
 
-      setCalls(prev => [newCall, ...prev.slice(0, 4)]);
-    }, 8000);
+      setCases(prev => [newCase, ...prev.slice(0, 4)]);
+    }, 15000);
 
     return () => clearInterval(interval);
   }, []);
@@ -149,7 +151,7 @@ export const RecentCallsFeed: React.FC = () => {
   return (
     <div className="glass rounded-xl p-6">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-foreground">Recent Calls</h2>
+        <h2 className="text-xl font-bold text-foreground">Case Gallery</h2>
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
           <span className="text-sm text-muted-foreground">Live</span>
@@ -157,8 +159,8 @@ export const RecentCallsFeed: React.FC = () => {
       </div>
       
       <div className="space-y-4 max-h-96 overflow-y-auto">
-        {calls.map((call) => (
-          <CallCard key={call.id} call={call} />
+        {cases.map((caseData) => (
+          <CaseCard key={caseData.id} case={caseData} />
         ))}
       </div>
     </div>
