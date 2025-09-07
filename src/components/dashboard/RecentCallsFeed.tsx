@@ -206,38 +206,44 @@ export const RecentCallsFeed: React.FC = () => {
     };
   };
 
-  // Fetch recent calls from API
+  // Load recent calls using static data
   const fetchRecentCalls = async () => {
     try {
       setLoading(true);
       
-      // Load case analyses and recent calls in parallel
-      const [analyses, response] = await Promise.all([
-        loadCaseAnalyses(),
-        api.getAllTranscripts(undefined, { page: 1, limit: 5 })
-      ]);
-      
+      // Load case analyses from static file
+      const analyses = await loadCaseAnalyses();
       setCaseAnalyses(analyses);
       
-      // Map API data to display format using AI analyses
-      const displayCalls = response.transcripts.map(transcript => 
-        mapTranscriptToDisplayCall(transcript, analyses)
-      );
+      // Use static case analyses data directly
+      const displayCalls: DisplayCall[] = analyses.map(analysis => ({
+        id: analysis.id,
+        customerId: analysis.customerId,
+        customerName: analysis.customerName,
+        customerTier: 'Premium', // Default tier
+        agentName: analysis.agentName,
+        caseSummary: analysis.caseSummary,
+        sentiment: analysis.sentiment,
+        severity: analysis.severity,
+        timestamp: new Date(analysis.timestamp).toLocaleString(),
+        duration: '12:30', // Mock duration
+        issue: 'Customer Service'
+      }));
+      
       setCalls(displayCalls);
       setError(null);
     } catch (err) {
-      console.error('Error fetching recent calls:', err);
-      setError('Failed to load recent calls');
+      console.error('Error loading calls data:', err);
       
-      // Fallback to mock data if API fails
+      // Fallback to hardcoded mock data
       const mockCalls: DisplayCall[] = [
         {
-          id: '1',
+          id: '001',
           customerId: 'CC789654321',
           customerName: 'Sarah Mitchell',
           customerTier: 'Premium',
           agentName: 'Marcus Thompson',
-          caseSummary: 'Customer reported unauthorized charges on their credit card. Two unrecognized transactions totaling $217.49 were disputed.',
+          caseSummary: 'Customer reported unauthorized charges totaling $217.49 from unknown merchants. Immediate card block and fraud dispute initiated.',
           sentiment: 'positive',
           severity: 'High',
           timestamp: '2 hours ago',
@@ -245,30 +251,30 @@ export const RecentCallsFeed: React.FC = () => {
           issue: 'Fraud Reporting'
         },
         {
-          id: '2',
-          customerId: 'CC123456789',
-          customerName: 'Emily Chen',
-          customerTier: 'Elite',
-          agentName: 'Alex Rivera',
-          caseSummary: 'App payment processing error preventing transactions for two consecutive days. Issue resolved with provisional credit.',
-          sentiment: 'negative',
-          severity: 'Medium',
+          id: '002',
+          customerId: 'CC456789012',
+          customerName: 'David Rodriguez',
+          customerTier: 'Gold',
+          agentName: 'Jennifer Lee',
+          caseSummary: 'Customer requested credit limit increase from $3,500. Approved for increase to $6,500.',
+          sentiment: 'positive',
+          severity: 'Low',
           timestamp: '4 hours ago',
-          duration: '18:15',
-          issue: 'Technical Support'
+          duration: '8:15',
+          issue: 'Account Services'
         },
         {
-          id: '3',
-          customerId: 'CC987654321',
-          customerName: 'Michael Brown',
-          customerTier: 'Premium',
-          agentName: 'Emma Davis',
-          caseSummary: 'Website crash preventing online payments. Customer expressed urgency due to approaching deadline.',
-          sentiment: 'negative',
-          severity: 'High',
+          id: '003',
+          customerId: 'CC234567890',
+          customerName: 'Emily Chen',
+          customerTier: 'Elite',
+          agentName: 'Robert Kim',
+          caseSummary: 'Elite member experiencing mobile app payment failures for 2 days. Urgent payment processed via phone.',
+          sentiment: 'neutral',
+          severity: 'Medium',
           timestamp: '6 hours ago',
           duration: '16:42',
-          issue: 'System Technical Issue'
+          issue: 'Technical Support'
         }
       ];
       setCalls(mockCalls);
