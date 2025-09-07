@@ -39,13 +39,47 @@ export const MetricsBar: React.FC = () => {
     try {
       setLoading(true);
 
-      // Call backend API
-      const liveStats = await api.getDashboardStats();
+      // Use mock data since backend isn't available in Lovable environment
+      const mockStats: DashboardStats = {
+        totalCalls: 1247,
+        averageSatisfactionScore: 8.2,
+        callsByCategory: [
+          { category: "Billing", count: 423 },
+          { category: "Technical Support", count: 387 },
+          { category: "Account Management", count: 291 },
+          { category: "General Inquiry", count: 146 }
+        ],
+        callsByResolution: [
+          { status: "Resolved", count: 1098 },
+          { status: "Pending", count: 89 },
+          { status: "Escalated", count: 60 }
+        ],
+        callsByTier: [
+          { tier: "Premium", count: 412 },
+          { tier: "Standard", count: 589 },
+          { tier: "Basic", count: 246 }
+        ],
+        callsBySeverity: [
+          { severity: "Low", count: 892 },
+          { severity: "Medium", count: 267 },
+          { severity: "High", count: 88 }
+        ],
+        averageCallDuration: 12.5,
+        followUpRequiredCount: 34,
+        callTrends: [
+          { date: "2025-09-01", count: 89, averageSatisfaction: 8.1 },
+          { date: "2025-09-02", count: 92, averageSatisfaction: 8.3 },
+          { date: "2025-09-03", count: 78, averageSatisfaction: 8.0 },
+          { date: "2025-09-04", count: 105, averageSatisfaction: 8.4 },
+          { date: "2025-09-05", count: 98, averageSatisfaction: 8.2 },
+          { date: "2025-09-06", count: 112, averageSatisfaction: 8.5 }
+        ]
+      };
 
       // Persist previous stats for delta calculations
       if (stats) setPreviousStats(stats);
 
-      setStats(liveStats);
+      setStats(mockStats);
       setError(null);
     } catch (err) {
       console.error('Error loading dashboard stats:', err);
