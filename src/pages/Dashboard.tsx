@@ -10,7 +10,7 @@ export const Dashboard: React.FC = () => {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-foreground mb-2">
-          Financial Services Analytics Dashboard
+          Automated Feedback System
         </h1>
         <p className="text-muted-foreground">
           Real-time call analytics and customer service intelligence
