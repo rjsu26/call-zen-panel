@@ -1,0 +1,3494 @@
+[
+  {
+    "id": "C001-1",
+    "title": "Unauthorized / Fraudulent Charge Handling",
+    "category": "Fraud & Dispute",
+    "description": "Transactions reported as unauthorized must be investigated promptly, provisional credit offered when applicable, and card reissued if fraud is confirmed.",
+    "keywords": [
+      "unauthorized",
+      "unauthorised",
+      "not recognized",
+      "fraudulent",
+      "suspicious",
+      "fraud",
+      "stolen",
+      "not recognize",
+      "unauth"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent failed to flag suspicious transactions",
+      "No provisional credit offered"
+    ]
+  },
+  {
+    "id": "C002-2",
+    "title": "Repeated Unresolved Complaints - voice channel",
+    "category": "Service Quality",
+    "description": "Customers reporting the same issue multiple times (e.g., 2+ calls) indicate escalation and potential systemic failure. - voice channel",
+    "keywords": [
+      "again",
+      "third call",
+      "multiple times",
+      "still not resolved",
+      "called before"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer reported this is their 3rd call for same issue"
+    ]
+  },
+  {
+    "id": "C003-3",
+    "title": "Payment Processing Failures Affecting Deadlines - mobile app",
+    "category": "Payments",
+    "description": "Payment system failures that prevent customers making on-time payments and expose them to late fees must be prioritized. - mobile app",
+    "keywords": [
+      "payment failed",
+      "payment processing error",
+      "payment not processed",
+      "transaction failed",
+      "cannot process payment",
+      "unable to pay",
+      "app error",
+      "website crash",
+      "deadline",
+      "due tomorrow",
+      "late fee"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "System outage prevented payment before due date"
+    ]
+  },
+  {
+    "id": "C004-4",
+    "title": "Data Privacy / PII Exposure - web portal",
+    "category": "Data Privacy",
+    "description": "Any mention or evidence of personal information exposure (full PAN, SSN, PIN) must trigger privacy incident protocols and possible breach notification. - web portal",
+    "keywords": [
+      "last four",
+      "full card number",
+      "ssn",
+      "pin",
+      "leaked",
+      "exposed",
+      "data breach",
+      "card info"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent read full PAN on an unsecured channel"
+    ]
+  },
+  {
+    "id": "C005-5",
+    "title": "Failure to Follow Dispute / Chargeback Procedures - third-party processor",
+    "category": "Regulatory Procedures",
+    "description": "Agents must follow documented dispute processes; failure can violate card network rules and consumer protection laws. - third-party processor",
+    "keywords": [
+      "dispute",
+      "chargeback",
+      "filed dispute",
+      "provisional credit",
+      "investigation"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Dispute not submitted within required timeframe"
+    ]
+  },
+  {
+    "id": "C006-6",
+    "title": "Incorrect Fees or Misapplied Charges - escalated case",
+    "category": "Billing Accuracy",
+    "description": "Customers billed incorrectly (late fees, overlimit fees) must be corrected and credited when in error. - escalated case",
+    "keywords": [
+      "late fee",
+      "overlimit fee",
+      "charged incorrectly",
+      "wrong amount",
+      "extra charge"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Late fee charged despite on-time payment"
+    ]
+  },
+  {
+    "id": "C007-7",
+    "title": "Failure to Provide Required Disclosures - repeated occurrence",
+    "category": "Regulatory Disclosures",
+    "description": "Regulatory disclosures (rates, terms, fees) must be provided at required touchpoints; omissions are compliance issues. - repeated occurrence",
+    "keywords": [
+      "disclosure",
+      "terms",
+      "apr",
+      "rate",
+      "statement",
+      "not informed"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not disclose APR change"
+    ]
+  },
+  {
+    "id": "C008-8",
+    "title": "Unapproved Account Changes / Upgrades - seasonal spike",
+    "category": "Authorization & Consent",
+    "description": "Changes to account settings, credit limits, or enrollment must have proper authorization and record of consent. - seasonal spike",
+    "keywords": [
+      "increase limit",
+      "credit limit increase",
+      "upgrade",
+      "enroll",
+      "without permission",
+      "not authorized"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Limit increased without customer's explicit consent"
+    ]
+  },
+  {
+    "id": "C009-9",
+    "title": "TCPA / Call Consent Violations - high-value customer",
+    "category": "Communications",
+    "description": "Calling or messaging customers without consent or calling at prohibited times may violate TCPA and similar laws. - high-value customer",
+    "keywords": [
+      "called after hours",
+      "no consent",
+      "do not call",
+      "robocall",
+      "automated messages"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Contacted customer after DNC registration"
+    ]
+  },
+  {
+    "id": "C010-10",
+    "title": "Misrepresentation or Deceptive Practices (UDAAP) - regulatory notice",
+    "category": "Fair Practices",
+    "description": "Any misleading statements about products, fees, or remedies; deceptive promises are violations of UDAAP. - regulatory notice",
+    "keywords": [
+      "guarantee",
+      "will fix for sure",
+      "misleading",
+      "false promise",
+      "not true"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent promised expedited refund that was not allowed"
+    ]
+  },
+  {
+    "id": "C011-11",
+    "title": "Failure to Escalate High-Severity Cases",
+    "category": "Escalation",
+    "description": "Cases meeting escalation criteria (fraud, severe financial harm, regulatory breach) must be promptly escalated.",
+    "keywords": [
+      "supervisor",
+      "escalate",
+      "escalation",
+      "urgent",
+      "manager",
+      "complaint severe"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not escalate when customer threatened legal action"
+    ]
+  },
+  {
+    "id": "C012-12",
+    "title": "Inadequate Recordkeeping / Missing Call Logs - voice channel",
+    "category": "Recordkeeping",
+    "description": "Regulations require accurate records of communications and actions; missing logs hinder audits and investigations. - voice channel",
+    "keywords": [
+      "no record",
+      "no log",
+      "call not recorded",
+      "missing transcript",
+      "deleted"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Call recording unavailable for disputed transaction"
+    ]
+  },
+  {
+    "id": "C013-13",
+    "title": "PCI-DSS Non-Compliance in Voice Channels - mobile app",
+    "category": "Security",
+    "description": "Sensitive cardholder data must not be stored or transmitted insecurely; PCI controls must be followed during calls. - mobile app",
+    "keywords": [
+      "full card number",
+      "store PAN",
+      "unencrypted",
+      "CVV",
+      "PIN",
+      "card details"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent wrote down full card number in plain text"
+    ]
+  },
+  {
+    "id": "C014-14",
+    "title": "Inadequate KYC / Identity Verification - web portal",
+    "category": "Account Security",
+    "description": "Failure to properly verify customer identity before revealing account details or performing sensitive actions. - web portal",
+    "keywords": [
+      "verify identity",
+      "security questions",
+      "last four",
+      "mother's maiden name",
+      "did not verify"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent allowed account changes without proper verification"
+    ]
+  },
+  {
+    "id": "C015-15",
+    "title": "Improper Handling of Chargebacks vs Refunds - third-party processor",
+    "category": "Payments",
+    "description": "Misclassifying consumer complaints as refunds or vice versa can disrupt dispute tracking and violate rules. - third-party processor",
+    "keywords": [
+      "refund",
+      "chargeback",
+      "credited",
+      "merchant dispute"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Refund issued where dispute process required"
+    ]
+  },
+  {
+    "id": "C016-16",
+    "title": "Breach Notification Delays - escalated case",
+    "category": "Incident Response",
+    "description": "Delayed notification to affected customers or regulators after a data breach can lead to regulatory penalties. - escalated case",
+    "keywords": [
+      "breach",
+      "data breach",
+      "leak",
+      "notify",
+      "notification delay"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer informed weeks after confirmed breach"
+    ]
+  },
+  {
+    "id": "C017-17",
+    "title": "Discriminatory Treatment / Fair Lending Issues - repeated occurrence",
+    "category": "Fair Practices",
+    "description": "Differential treatment or denial of services based on protected characteristics may violate fair lending and consumer protection laws. - repeated occurrence",
+    "keywords": [
+      "race",
+      "gender",
+      "discriminate",
+      "denied due to"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied program due to location"
+    ]
+  },
+  {
+    "id": "C018-18",
+    "title": "Failure to Document Customer Consent for Recordings - seasonal spike",
+    "category": "Privacy",
+    "description": "Recording calls without required consent or failing to record consent is a compliance issue in many jurisdictions. - seasonal spike",
+    "keywords": [
+      "recording consent",
+      "we record",
+      "consent not obtained",
+      "call recorded"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "No consent recorded before recording call"
+    ]
+  },
+  {
+    "id": "C019-19",
+    "title": "Unauthorized Disclosure of Account Information - high-value customer",
+    "category": "Privacy",
+    "description": "Discussing account details with unauthorized third parties or in public channels is prohibited. - high-value customer",
+    "keywords": [
+      "shared with",
+      "third party",
+      "gave info to",
+      "disclosed"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent disclosed account balance to caller without authorization"
+    ]
+  },
+  {
+    "id": "C020-20",
+    "title": "Improper Refund Timing or Communication - regulatory notice",
+    "category": "Customer Remedies",
+    "description": "Customers must be clearly advised about timelines for provisional credits and final resolution; false timelines are problematic. - regulatory notice",
+    "keywords": [
+      "24 hours",
+      "5-7 business days",
+      "will appear tomorrow",
+      "provisional credit"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Agent promised immediate full refund but process takes longer"
+    ]
+  },
+  {
+    "id": "C021-21",
+    "title": "FCRA - Incorrect Credit Reporting",
+    "category": "Credit Reporting",
+    "description": "Failure to correct or investigate inaccurate information reported to credit bureaus in a timely manner may violate the Fair Credit Reporting Act (FCRA).",
+    "keywords": [
+      "credit report",
+      "inaccurate",
+      "wrong balance",
+      "reported incorrectly",
+      "dispute not handled"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer disputed an item and reporting not updated"
+    ]
+  },
+  {
+    "id": "C022-22",
+    "title": "FDCPA - Harassment by Debt Collectors - voice channel",
+    "category": "Debt Collection",
+    "description": "Communications that are abusive, misleading, or harassing when collecting debt can violate the Fair Debt Collection Practices Act (FDCPA). - voice channel",
+    "keywords": [
+      "harass",
+      "threaten",
+      "call relentlessly",
+      "false statement",
+      "illegal collection"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Collector threatened legal action improperly"
+    ]
+  },
+  {
+    "id": "C023-23",
+    "title": "ECOA - Discriminatory Credit Decision - mobile app",
+    "category": "Fair Lending",
+    "description": "Denying credit or treating applicants differently based on protected characteristics violates the Equal Credit Opportunity Act (ECOA). - mobile app",
+    "keywords": [
+      "denied due to",
+      "discriminate",
+      "refused because",
+      "race",
+      "gender"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Applicant was denied credit for improper discriminatory reasons"
+    ]
+  },
+  {
+    "id": "C024-24",
+    "title": "TILA - Failure to Provide Truth-in-Lending Disclosures - web portal",
+    "category": "Regulatory Disclosures",
+    "description": "Failing to disclose APR, finance charges, or other material loan terms violates the Truth in Lending Act (TILA). - web portal",
+    "keywords": [
+      "apr",
+      "finance charge",
+      "truth in lending",
+      "rate not disclosed",
+      "terms not shown"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not provide required APR disclosure"
+    ]
+  },
+  {
+    "id": "C025-25",
+    "title": "GLBA - Improper Handling of Consumer Financial Data - third-party processor",
+    "category": "Data Privacy",
+    "description": "Failure to protect or properly share consumer financial information can violate the Gramm-Leach-Bliley Act (GLBA) and internal privacy policies. - third-party processor",
+    "keywords": [
+      "share data",
+      "sold data",
+      "unauthorized access",
+      "unauthorised",
+      "not recognized",
+      "fraudulent",
+      "suspicious",
+      "privacy policy",
+      "consumer financial information"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer data shared without proper disclosure or consent"
+    ]
+  },
+  {
+    "id": "C026-26",
+    "title": "CARD Act - Inadequate Notice for Rate/Fee Changes - escalated case",
+    "category": "Billing Accuracy",
+    "description": "Credit card customers must receive advance notice for significant rate or fee increases as required by the Credit CARD Act. - escalated case",
+    "keywords": [
+      "rate increase",
+      "fee change",
+      "notice not given",
+      "billing change",
+      "card act"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer was charged increased fees without advance notice"
+    ]
+  },
+  {
+    "id": "C027-27",
+    "title": "CFPB - Unfair or Deceptive Acts (UDAAP) Enforcement - repeated occurrence",
+    "category": "Regulatory",
+    "description": "Practices that are abusive, unfair, or deceptive may trigger CFPB enforcement under UDAAP guidelines. - repeated occurrence",
+    "keywords": [
+      "misleading",
+      "deceptive",
+      "abusive",
+      "not true",
+      "hidden fee"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Promotional language misrepresented actual terms"
+    ]
+  },
+  {
+    "id": "C028-28",
+    "title": "Credit Reporting - Failure to Provide Adverse Action Notice - seasonal spike",
+    "category": "Credit Reporting",
+    "description": "Lenders must provide an adverse action notice when denying credit or taking other adverse actions based on information from credit reports. - seasonal spike",
+    "keywords": [
+      "adverse action",
+      "denial notice",
+      "credit denied",
+      "adverse notice not sent"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied credit but not provided adverse action notice"
+    ]
+  },
+  {
+    "id": "C029-29",
+    "title": "Payment Protection - Failure to Honor Promised Provisional Credits - high-value customer",
+    "category": "Customer Remedies",
+    "description": "When provisional credits are promised pending investigation (e.g., for unauthorized transactions), they must be applied per regulation and internal SLA. - high-value customer",
+    "keywords": [
+      "provisional credit",
+      "promised credit",
+      "not applied",
+      "investigation pending"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Provisional credit promised but not applied"
+    ]
+  },
+  {
+    "id": "C030-30",
+    "title": "FCRA - Furnisher Duty to Investigate - regulatory notice",
+    "category": "Credit Reporting",
+    "description": "Entities that furnish information to credit reporting agencies must investigate consumer disputes, correct inaccurate data, and communicate results as required under the FCRA. - regulatory notice",
+    "keywords": [
+      "furnisher",
+      "investigate dispute",
+      "did not investigate",
+      "correct reporting",
+      "reporting not corrected"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Furnisher failed to investigate consumer dispute within statutory timeframe"
+    ]
+  },
+  {
+    "id": "C031-31",
+    "title": "FCRA - Failure to Provide Adverse Action Based on Credit Report",
+    "category": "Credit Reporting",
+    "description": "When adverse actions (denial, increased rate) are taken based on credit report information, consumers must receive a compliant adverse action notice explaining the decision and source of information.",
+    "keywords": [
+      "adverse action",
+      "credit report",
+      "denial notice",
+      "reason for denial",
+      "based on credit report"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied credit without receiving adverse action notice"
+    ]
+  },
+  {
+    "id": "C032-32",
+    "title": "FCRA - Failure to Block or Correct Identity Theft Records - voice channel",
+    "category": "Identity & Fraud",
+    "description": "When a consumer reports identity theft, furnishers and CRAs must block or correct fraudulent information once validated under FCRA procedures. - voice channel",
+    "keywords": [
+      "identity theft",
+      "fraudulent charge",
+      "block record",
+      "fraud report",
+      "not blocked"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Fraudulent account not blocked after identity theft report"
+    ]
+  },
+  {
+    "id": "C033-33",
+    "title": "CFPB - Failure to Properly Handle Consumer Complaints - mobile app",
+    "category": "Customer Remedies",
+    "description": "Under CFPB guidance, covered firms must maintain effective complaint-handling processes and timely responses to consumer complaints; failures can lead to supervisory action. - mobile app",
+    "keywords": [
+      "complaint not handled",
+      "no response",
+      "did not escalate complaint",
+      "CFPB complaint",
+      "consumer complaint"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Multiple complaints left unaddressed, consumer filed CFPB complaint"
+    ]
+  },
+  {
+    "id": "C034-34",
+    "title": "CFPB - Unfair or Deceptive Practices (UDAAP) in Marketing/Disclosure - web portal",
+    "category": "Regulatory",
+    "description": "Marketing or disclosure practices that mislead consumers about terms, fees, or remedies may constitute unfair or deceptive acts under CFPB enforcement priorities. - web portal",
+    "keywords": [
+      "misleading",
+      "not disclosed",
+      "hidden fee",
+      "bait and switch",
+      "not true"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Promotional claims omitted material fees"
+    ]
+  },
+  {
+    "id": "C035-35",
+    "title": "CFPB - Failure to Maintain Compliance Program / Controls - third-party processor",
+    "category": "Governance",
+    "description": "Lack of adequate training, monitoring, or internal controls for consumer-facing operations can lead to systemic violations and CFPB supervisory actions. - third-party processor",
+    "keywords": [
+      "no training",
+      "no monitoring",
+      "policy not followed",
+      "controls missing",
+      "audit failure"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent repeatedly violated call scripts; training records missing"
+    ]
+  },
+  {
+    "id": "C001-36",
+    "title": "Unauthorized / Fraudulent Charge Handling - escalated case",
+    "category": "Fraud & Dispute",
+    "description": "Transactions reported as unauthorized must be investigated promptly, provisional credit offered when applicable, and card reissued if fraud is confirmed. - escalated case",
+    "keywords": [
+      "unauthorized",
+      "unauthorised",
+      "not recognized",
+      "fraudulent",
+      "suspicious",
+      "fraud",
+      "stolen",
+      "not recognize",
+      "unauth"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent failed to flag suspicious transactions",
+      "No provisional credit offered"
+    ]
+  },
+  {
+    "id": "C002-37",
+    "title": "Repeated Unresolved Complaints - repeated occurrence",
+    "category": "Service Quality",
+    "description": "Customers reporting the same issue multiple times (e.g., 2+ calls) indicate escalation and potential systemic failure. - repeated occurrence",
+    "keywords": [
+      "again",
+      "third call",
+      "multiple times",
+      "still not resolved",
+      "called before"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer reported this is their 3rd call for same issue"
+    ]
+  },
+  {
+    "id": "C003-38",
+    "title": "Payment Processing Failures Affecting Deadlines - seasonal spike",
+    "category": "Payments",
+    "description": "Payment system failures that prevent customers making on-time payments and expose them to late fees must be prioritized. - seasonal spike",
+    "keywords": [
+      "payment failed",
+      "payment processing error",
+      "payment not processed",
+      "transaction failed",
+      "cannot process payment",
+      "unable to pay",
+      "app error",
+      "website crash",
+      "deadline",
+      "due tomorrow",
+      "late fee"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "System outage prevented payment before due date"
+    ]
+  },
+  {
+    "id": "C004-39",
+    "title": "Data Privacy / PII Exposure - high-value customer",
+    "category": "Data Privacy",
+    "description": "Any mention or evidence of personal information exposure (full PAN, SSN, PIN) must trigger privacy incident protocols and possible breach notification. - high-value customer",
+    "keywords": [
+      "last four",
+      "full card number",
+      "ssn",
+      "pin",
+      "leaked",
+      "exposed",
+      "data breach",
+      "card info"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent read full PAN on an unsecured channel"
+    ]
+  },
+  {
+    "id": "C005-40",
+    "title": "Failure to Follow Dispute / Chargeback Procedures - regulatory notice",
+    "category": "Regulatory Procedures",
+    "description": "Agents must follow documented dispute processes; failure can violate card network rules and consumer protection laws. - regulatory notice",
+    "keywords": [
+      "dispute",
+      "chargeback",
+      "filed dispute",
+      "provisional credit",
+      "investigation"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Dispute not submitted within required timeframe"
+    ]
+  },
+  {
+    "id": "C006-41",
+    "title": "Incorrect Fees or Misapplied Charges",
+    "category": "Billing Accuracy",
+    "description": "Customers billed incorrectly (late fees, overlimit fees) must be corrected and credited when in error.",
+    "keywords": [
+      "late fee",
+      "overlimit fee",
+      "charged incorrectly",
+      "wrong amount",
+      "extra charge"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Late fee charged despite on-time payment"
+    ]
+  },
+  {
+    "id": "C007-42",
+    "title": "Failure to Provide Required Disclosures - voice channel",
+    "category": "Regulatory Disclosures",
+    "description": "Regulatory disclosures (rates, terms, fees) must be provided at required touchpoints; omissions are compliance issues. - voice channel",
+    "keywords": [
+      "disclosure",
+      "terms",
+      "apr",
+      "rate",
+      "statement",
+      "not informed"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not disclose APR change"
+    ]
+  },
+  {
+    "id": "C008-43",
+    "title": "Unapproved Account Changes / Upgrades - mobile app",
+    "category": "Authorization & Consent",
+    "description": "Changes to account settings, credit limits, or enrollment must have proper authorization and record of consent. - mobile app",
+    "keywords": [
+      "increase limit",
+      "credit limit increase",
+      "upgrade",
+      "enroll",
+      "without permission",
+      "not authorized"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Limit increased without customer's explicit consent"
+    ]
+  },
+  {
+    "id": "C009-44",
+    "title": "TCPA / Call Consent Violations - web portal",
+    "category": "Communications",
+    "description": "Calling or messaging customers without consent or calling at prohibited times may violate TCPA and similar laws. - web portal",
+    "keywords": [
+      "called after hours",
+      "no consent",
+      "do not call",
+      "robocall",
+      "automated messages"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Contacted customer after DNC registration"
+    ]
+  },
+  {
+    "id": "C010-45",
+    "title": "Misrepresentation or Deceptive Practices (UDAAP) - third-party processor",
+    "category": "Fair Practices",
+    "description": "Any misleading statements about products, fees, or remedies; deceptive promises are violations of UDAAP. - third-party processor",
+    "keywords": [
+      "guarantee",
+      "will fix for sure",
+      "misleading",
+      "false promise",
+      "not true"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent promised expedited refund that was not allowed"
+    ]
+  },
+  {
+    "id": "C011-46",
+    "title": "Failure to Escalate High-Severity Cases - escalated case",
+    "category": "Escalation",
+    "description": "Cases meeting escalation criteria (fraud, severe financial harm, regulatory breach) must be promptly escalated. - escalated case",
+    "keywords": [
+      "supervisor",
+      "escalate",
+      "escalation",
+      "urgent",
+      "manager",
+      "complaint severe"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not escalate when customer threatened legal action"
+    ]
+  },
+  {
+    "id": "C012-47",
+    "title": "Inadequate Recordkeeping / Missing Call Logs - repeated occurrence",
+    "category": "Recordkeeping",
+    "description": "Regulations require accurate records of communications and actions; missing logs hinder audits and investigations. - repeated occurrence",
+    "keywords": [
+      "no record",
+      "no log",
+      "call not recorded",
+      "missing transcript",
+      "deleted"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Call recording unavailable for disputed transaction"
+    ]
+  },
+  {
+    "id": "C013-48",
+    "title": "PCI-DSS Non-Compliance in Voice Channels - seasonal spike",
+    "category": "Security",
+    "description": "Sensitive cardholder data must not be stored or transmitted insecurely; PCI controls must be followed during calls. - seasonal spike",
+    "keywords": [
+      "full card number",
+      "store PAN",
+      "unencrypted",
+      "CVV",
+      "PIN",
+      "card details"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent wrote down full card number in plain text"
+    ]
+  },
+  {
+    "id": "C014-49",
+    "title": "Inadequate KYC / Identity Verification - high-value customer",
+    "category": "Account Security",
+    "description": "Failure to properly verify customer identity before revealing account details or performing sensitive actions. - high-value customer",
+    "keywords": [
+      "verify identity",
+      "security questions",
+      "last four",
+      "mother's maiden name",
+      "did not verify"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent allowed account changes without proper verification"
+    ]
+  },
+  {
+    "id": "C015-50",
+    "title": "Improper Handling of Chargebacks vs Refunds - regulatory notice",
+    "category": "Payments",
+    "description": "Misclassifying consumer complaints as refunds or vice versa can disrupt dispute tracking and violate rules. - regulatory notice",
+    "keywords": [
+      "refund",
+      "chargeback",
+      "credited",
+      "merchant dispute"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Refund issued where dispute process required"
+    ]
+  },
+  {
+    "id": "C016-51",
+    "title": "Breach Notification Delays",
+    "category": "Incident Response",
+    "description": "Delayed notification to affected customers or regulators after a data breach can lead to regulatory penalties.",
+    "keywords": [
+      "breach",
+      "data breach",
+      "leak",
+      "notify",
+      "notification delay"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer informed weeks after confirmed breach"
+    ]
+  },
+  {
+    "id": "C017-52",
+    "title": "Discriminatory Treatment / Fair Lending Issues - voice channel",
+    "category": "Fair Practices",
+    "description": "Differential treatment or denial of services based on protected characteristics may violate fair lending and consumer protection laws. - voice channel",
+    "keywords": [
+      "race",
+      "gender",
+      "discriminate",
+      "denied due to"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied program due to location"
+    ]
+  },
+  {
+    "id": "C018-53",
+    "title": "Failure to Document Customer Consent for Recordings - mobile app",
+    "category": "Privacy",
+    "description": "Recording calls without required consent or failing to record consent is a compliance issue in many jurisdictions. - mobile app",
+    "keywords": [
+      "recording consent",
+      "we record",
+      "consent not obtained",
+      "call recorded"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "No consent recorded before recording call"
+    ]
+  },
+  {
+    "id": "C019-54",
+    "title": "Unauthorized Disclosure of Account Information - web portal",
+    "category": "Privacy",
+    "description": "Discussing account details with unauthorized third parties or in public channels is prohibited. - web portal",
+    "keywords": [
+      "shared with",
+      "third party",
+      "gave info to",
+      "disclosed"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent disclosed account balance to caller without authorization"
+    ]
+  },
+  {
+    "id": "C020-55",
+    "title": "Improper Refund Timing or Communication - third-party processor",
+    "category": "Customer Remedies",
+    "description": "Customers must be clearly advised about timelines for provisional credits and final resolution; false timelines are problematic. - third-party processor",
+    "keywords": [
+      "24 hours",
+      "5-7 business days",
+      "will appear tomorrow",
+      "provisional credit"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Agent promised immediate full refund but process takes longer"
+    ]
+  },
+  {
+    "id": "C021-56",
+    "title": "FCRA - Incorrect Credit Reporting - escalated case",
+    "category": "Credit Reporting",
+    "description": "Failure to correct or investigate inaccurate information reported to credit bureaus in a timely manner may violate the Fair Credit Reporting Act (FCRA). - escalated case",
+    "keywords": [
+      "credit report",
+      "inaccurate",
+      "wrong balance",
+      "reported incorrectly",
+      "dispute not handled"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer disputed an item and reporting not updated"
+    ]
+  },
+  {
+    "id": "C022-57",
+    "title": "FDCPA - Harassment by Debt Collectors - repeated occurrence",
+    "category": "Debt Collection",
+    "description": "Communications that are abusive, misleading, or harassing when collecting debt can violate the Fair Debt Collection Practices Act (FDCPA). - repeated occurrence",
+    "keywords": [
+      "harass",
+      "threaten",
+      "call relentlessly",
+      "false statement",
+      "illegal collection"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Collector threatened legal action improperly"
+    ]
+  },
+  {
+    "id": "C023-58",
+    "title": "ECOA - Discriminatory Credit Decision - seasonal spike",
+    "category": "Fair Lending",
+    "description": "Denying credit or treating applicants differently based on protected characteristics violates the Equal Credit Opportunity Act (ECOA). - seasonal spike",
+    "keywords": [
+      "denied due to",
+      "discriminate",
+      "refused because",
+      "race",
+      "gender"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Applicant was denied credit for improper discriminatory reasons"
+    ]
+  },
+  {
+    "id": "C024-59",
+    "title": "TILA - Failure to Provide Truth-in-Lending Disclosures - high-value customer",
+    "category": "Regulatory Disclosures",
+    "description": "Failing to disclose APR, finance charges, or other material loan terms violates the Truth in Lending Act (TILA). - high-value customer",
+    "keywords": [
+      "apr",
+      "finance charge",
+      "truth in lending",
+      "rate not disclosed",
+      "terms not shown"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not provide required APR disclosure"
+    ]
+  },
+  {
+    "id": "C025-60",
+    "title": "GLBA - Improper Handling of Consumer Financial Data - regulatory notice",
+    "category": "Data Privacy",
+    "description": "Failure to protect or properly share consumer financial information can violate the Gramm-Leach-Bliley Act (GLBA) and internal privacy policies. - regulatory notice",
+    "keywords": [
+      "share data",
+      "sold data",
+      "unauthorized access",
+      "unauthorised",
+      "not recognized",
+      "fraudulent",
+      "suspicious",
+      "privacy policy",
+      "consumer financial information"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer data shared without proper disclosure or consent"
+    ]
+  },
+  {
+    "id": "C026-61",
+    "title": "CARD Act - Inadequate Notice for Rate/Fee Changes",
+    "category": "Billing Accuracy",
+    "description": "Credit card customers must receive advance notice for significant rate or fee increases as required by the Credit CARD Act.",
+    "keywords": [
+      "rate increase",
+      "fee change",
+      "notice not given",
+      "billing change",
+      "card act"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer was charged increased fees without advance notice"
+    ]
+  },
+  {
+    "id": "C027-62",
+    "title": "CFPB - Unfair or Deceptive Acts (UDAAP) Enforcement - voice channel",
+    "category": "Regulatory",
+    "description": "Practices that are abusive, unfair, or deceptive may trigger CFPB enforcement under UDAAP guidelines. - voice channel",
+    "keywords": [
+      "misleading",
+      "deceptive",
+      "abusive",
+      "not true",
+      "hidden fee"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Promotional language misrepresented actual terms"
+    ]
+  },
+  {
+    "id": "C028-63",
+    "title": "Credit Reporting - Failure to Provide Adverse Action Notice - mobile app",
+    "category": "Credit Reporting",
+    "description": "Lenders must provide an adverse action notice when denying credit or taking other adverse actions based on information from credit reports. - mobile app",
+    "keywords": [
+      "adverse action",
+      "denial notice",
+      "credit denied",
+      "adverse notice not sent"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied credit but not provided adverse action notice"
+    ]
+  },
+  {
+    "id": "C029-64",
+    "title": "Payment Protection - Failure to Honor Promised Provisional Credits - web portal",
+    "category": "Customer Remedies",
+    "description": "When provisional credits are promised pending investigation (e.g., for unauthorized transactions), they must be applied per regulation and internal SLA. - web portal",
+    "keywords": [
+      "provisional credit",
+      "promised credit",
+      "not applied",
+      "investigation pending"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Provisional credit promised but not applied"
+    ]
+  },
+  {
+    "id": "C030-65",
+    "title": "FCRA - Furnisher Duty to Investigate - third-party processor",
+    "category": "Credit Reporting",
+    "description": "Entities that furnish information to credit reporting agencies must investigate consumer disputes, correct inaccurate data, and communicate results as required under the FCRA. - third-party processor",
+    "keywords": [
+      "furnisher",
+      "investigate dispute",
+      "did not investigate",
+      "correct reporting",
+      "reporting not corrected"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Furnisher failed to investigate consumer dispute within statutory timeframe"
+    ]
+  },
+  {
+    "id": "C031-66",
+    "title": "FCRA - Failure to Provide Adverse Action Based on Credit Report - escalated case",
+    "category": "Credit Reporting",
+    "description": "When adverse actions (denial, increased rate) are taken based on credit report information, consumers must receive a compliant adverse action notice explaining the decision and source of information. - escalated case",
+    "keywords": [
+      "adverse action",
+      "credit report",
+      "denial notice",
+      "reason for denial",
+      "based on credit report"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied credit without receiving adverse action notice"
+    ]
+  },
+  {
+    "id": "C032-67",
+    "title": "FCRA - Failure to Block or Correct Identity Theft Records - repeated occurrence",
+    "category": "Identity & Fraud",
+    "description": "When a consumer reports identity theft, furnishers and CRAs must block or correct fraudulent information once validated under FCRA procedures. - repeated occurrence",
+    "keywords": [
+      "identity theft",
+      "fraudulent charge",
+      "block record",
+      "fraud report",
+      "not blocked"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Fraudulent account not blocked after identity theft report"
+    ]
+  },
+  {
+    "id": "C033-68",
+    "title": "CFPB - Failure to Properly Handle Consumer Complaints - seasonal spike",
+    "category": "Customer Remedies",
+    "description": "Under CFPB guidance, covered firms must maintain effective complaint-handling processes and timely responses to consumer complaints; failures can lead to supervisory action. - seasonal spike",
+    "keywords": [
+      "complaint not handled",
+      "no response",
+      "did not escalate complaint",
+      "CFPB complaint",
+      "consumer complaint"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Multiple complaints left unaddressed, consumer filed CFPB complaint"
+    ]
+  },
+  {
+    "id": "C034-69",
+    "title": "CFPB - Unfair or Deceptive Practices (UDAAP) in Marketing/Disclosure - high-value customer",
+    "category": "Regulatory",
+    "description": "Marketing or disclosure practices that mislead consumers about terms, fees, or remedies may constitute unfair or deceptive acts under CFPB enforcement priorities. - high-value customer",
+    "keywords": [
+      "misleading",
+      "not disclosed",
+      "hidden fee",
+      "bait and switch",
+      "not true"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Promotional claims omitted material fees"
+    ]
+  },
+  {
+    "id": "C035-70",
+    "title": "CFPB - Failure to Maintain Compliance Program / Controls - regulatory notice",
+    "category": "Governance",
+    "description": "Lack of adequate training, monitoring, or internal controls for consumer-facing operations can lead to systemic violations and CFPB supervisory actions. - regulatory notice",
+    "keywords": [
+      "no training",
+      "no monitoring",
+      "policy not followed",
+      "controls missing",
+      "audit failure"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent repeatedly violated call scripts; training records missing"
+    ]
+  },
+  {
+    "id": "C001-71",
+    "title": "Unauthorized / Fraudulent Charge Handling",
+    "category": "Fraud & Dispute",
+    "description": "Transactions reported as unauthorized must be investigated promptly, provisional credit offered when applicable, and card reissued if fraud is confirmed.",
+    "keywords": [
+      "unauthorized",
+      "unauthorised",
+      "not recognized",
+      "fraudulent",
+      "suspicious",
+      "fraud",
+      "stolen",
+      "not recognize",
+      "unauth"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent failed to flag suspicious transactions",
+      "No provisional credit offered"
+    ]
+  },
+  {
+    "id": "C002-72",
+    "title": "Repeated Unresolved Complaints - voice channel",
+    "category": "Service Quality",
+    "description": "Customers reporting the same issue multiple times (e.g., 2+ calls) indicate escalation and potential systemic failure. - voice channel",
+    "keywords": [
+      "again",
+      "third call",
+      "multiple times",
+      "still not resolved",
+      "called before"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer reported this is their 3rd call for same issue"
+    ]
+  },
+  {
+    "id": "C003-73",
+    "title": "Payment Processing Failures Affecting Deadlines - mobile app",
+    "category": "Payments",
+    "description": "Payment system failures that prevent customers making on-time payments and expose them to late fees must be prioritized. - mobile app",
+    "keywords": [
+      "payment failed",
+      "payment processing error",
+      "payment not processed",
+      "transaction failed",
+      "cannot process payment",
+      "unable to pay",
+      "app error",
+      "website crash",
+      "deadline",
+      "due tomorrow",
+      "late fee"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "System outage prevented payment before due date"
+    ]
+  },
+  {
+    "id": "C004-74",
+    "title": "Data Privacy / PII Exposure - web portal",
+    "category": "Data Privacy",
+    "description": "Any mention or evidence of personal information exposure (full PAN, SSN, PIN) must trigger privacy incident protocols and possible breach notification. - web portal",
+    "keywords": [
+      "last four",
+      "full card number",
+      "ssn",
+      "pin",
+      "leaked",
+      "exposed",
+      "data breach",
+      "card info"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent read full PAN on an unsecured channel"
+    ]
+  },
+  {
+    "id": "C005-75",
+    "title": "Failure to Follow Dispute / Chargeback Procedures - third-party processor",
+    "category": "Regulatory Procedures",
+    "description": "Agents must follow documented dispute processes; failure can violate card network rules and consumer protection laws. - third-party processor",
+    "keywords": [
+      "dispute",
+      "chargeback",
+      "filed dispute",
+      "provisional credit",
+      "investigation"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Dispute not submitted within required timeframe"
+    ]
+  },
+  {
+    "id": "C006-76",
+    "title": "Incorrect Fees or Misapplied Charges - escalated case",
+    "category": "Billing Accuracy",
+    "description": "Customers billed incorrectly (late fees, overlimit fees) must be corrected and credited when in error. - escalated case",
+    "keywords": [
+      "late fee",
+      "overlimit fee",
+      "charged incorrectly",
+      "wrong amount",
+      "extra charge"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Late fee charged despite on-time payment"
+    ]
+  },
+  {
+    "id": "C007-77",
+    "title": "Failure to Provide Required Disclosures - repeated occurrence",
+    "category": "Regulatory Disclosures",
+    "description": "Regulatory disclosures (rates, terms, fees) must be provided at required touchpoints; omissions are compliance issues. - repeated occurrence",
+    "keywords": [
+      "disclosure",
+      "terms",
+      "apr",
+      "rate",
+      "statement",
+      "not informed"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not disclose APR change"
+    ]
+  },
+  {
+    "id": "C008-78",
+    "title": "Unapproved Account Changes / Upgrades - seasonal spike",
+    "category": "Authorization & Consent",
+    "description": "Changes to account settings, credit limits, or enrollment must have proper authorization and record of consent. - seasonal spike",
+    "keywords": [
+      "increase limit",
+      "credit limit increase",
+      "upgrade",
+      "enroll",
+      "without permission",
+      "not authorized"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Limit increased without customer's explicit consent"
+    ]
+  },
+  {
+    "id": "C009-79",
+    "title": "TCPA / Call Consent Violations - high-value customer",
+    "category": "Communications",
+    "description": "Calling or messaging customers without consent or calling at prohibited times may violate TCPA and similar laws. - high-value customer",
+    "keywords": [
+      "called after hours",
+      "no consent",
+      "do not call",
+      "robocall",
+      "automated messages"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Contacted customer after DNC registration"
+    ]
+  },
+  {
+    "id": "C010-80",
+    "title": "Misrepresentation or Deceptive Practices (UDAAP) - regulatory notice",
+    "category": "Fair Practices",
+    "description": "Any misleading statements about products, fees, or remedies; deceptive promises are violations of UDAAP. - regulatory notice",
+    "keywords": [
+      "guarantee",
+      "will fix for sure",
+      "misleading",
+      "false promise",
+      "not true"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent promised expedited refund that was not allowed"
+    ]
+  },
+  {
+    "id": "C011-81",
+    "title": "Failure to Escalate High-Severity Cases",
+    "category": "Escalation",
+    "description": "Cases meeting escalation criteria (fraud, severe financial harm, regulatory breach) must be promptly escalated.",
+    "keywords": [
+      "supervisor",
+      "escalate",
+      "escalation",
+      "urgent",
+      "manager",
+      "complaint severe"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not escalate when customer threatened legal action"
+    ]
+  },
+  {
+    "id": "C012-82",
+    "title": "Inadequate Recordkeeping / Missing Call Logs - voice channel",
+    "category": "Recordkeeping",
+    "description": "Regulations require accurate records of communications and actions; missing logs hinder audits and investigations. - voice channel",
+    "keywords": [
+      "no record",
+      "no log",
+      "call not recorded",
+      "missing transcript",
+      "deleted"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Call recording unavailable for disputed transaction"
+    ]
+  },
+  {
+    "id": "C013-83",
+    "title": "PCI-DSS Non-Compliance in Voice Channels - mobile app",
+    "category": "Security",
+    "description": "Sensitive cardholder data must not be stored or transmitted insecurely; PCI controls must be followed during calls. - mobile app",
+    "keywords": [
+      "full card number",
+      "store PAN",
+      "unencrypted",
+      "CVV",
+      "PIN",
+      "card details"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent wrote down full card number in plain text"
+    ]
+  },
+  {
+    "id": "C014-84",
+    "title": "Inadequate KYC / Identity Verification - web portal",
+    "category": "Account Security",
+    "description": "Failure to properly verify customer identity before revealing account details or performing sensitive actions. - web portal",
+    "keywords": [
+      "verify identity",
+      "security questions",
+      "last four",
+      "mother's maiden name",
+      "did not verify"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent allowed account changes without proper verification"
+    ]
+  },
+  {
+    "id": "C015-85",
+    "title": "Improper Handling of Chargebacks vs Refunds - third-party processor",
+    "category": "Payments",
+    "description": "Misclassifying consumer complaints as refunds or vice versa can disrupt dispute tracking and violate rules. - third-party processor",
+    "keywords": [
+      "refund",
+      "chargeback",
+      "credited",
+      "merchant dispute"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Refund issued where dispute process required"
+    ]
+  },
+  {
+    "id": "C016-86",
+    "title": "Breach Notification Delays - escalated case",
+    "category": "Incident Response",
+    "description": "Delayed notification to affected customers or regulators after a data breach can lead to regulatory penalties. - escalated case",
+    "keywords": [
+      "breach",
+      "data breach",
+      "leak",
+      "notify",
+      "notification delay"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer informed weeks after confirmed breach"
+    ]
+  },
+  {
+    "id": "C017-87",
+    "title": "Discriminatory Treatment / Fair Lending Issues - repeated occurrence",
+    "category": "Fair Practices",
+    "description": "Differential treatment or denial of services based on protected characteristics may violate fair lending and consumer protection laws. - repeated occurrence",
+    "keywords": [
+      "race",
+      "gender",
+      "discriminate",
+      "denied due to"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied program due to location"
+    ]
+  },
+  {
+    "id": "C018-88",
+    "title": "Failure to Document Customer Consent for Recordings - seasonal spike",
+    "category": "Privacy",
+    "description": "Recording calls without required consent or failing to record consent is a compliance issue in many jurisdictions. - seasonal spike",
+    "keywords": [
+      "recording consent",
+      "we record",
+      "consent not obtained",
+      "call recorded"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "No consent recorded before recording call"
+    ]
+  },
+  {
+    "id": "C019-89",
+    "title": "Unauthorized Disclosure of Account Information - high-value customer",
+    "category": "Privacy",
+    "description": "Discussing account details with unauthorized third parties or in public channels is prohibited. - high-value customer",
+    "keywords": [
+      "shared with",
+      "third party",
+      "gave info to",
+      "disclosed"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent disclosed account balance to caller without authorization"
+    ]
+  },
+  {
+    "id": "C020-90",
+    "title": "Improper Refund Timing or Communication - regulatory notice",
+    "category": "Customer Remedies",
+    "description": "Customers must be clearly advised about timelines for provisional credits and final resolution; false timelines are problematic. - regulatory notice",
+    "keywords": [
+      "24 hours",
+      "5-7 business days",
+      "will appear tomorrow",
+      "provisional credit"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Agent promised immediate full refund but process takes longer"
+    ]
+  },
+  {
+    "id": "C021-91",
+    "title": "FCRA - Incorrect Credit Reporting",
+    "category": "Credit Reporting",
+    "description": "Failure to correct or investigate inaccurate information reported to credit bureaus in a timely manner may violate the Fair Credit Reporting Act (FCRA).",
+    "keywords": [
+      "credit report",
+      "inaccurate",
+      "wrong balance",
+      "reported incorrectly",
+      "dispute not handled"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer disputed an item and reporting not updated"
+    ]
+  },
+  {
+    "id": "C022-92",
+    "title": "FDCPA - Harassment by Debt Collectors - voice channel",
+    "category": "Debt Collection",
+    "description": "Communications that are abusive, misleading, or harassing when collecting debt can violate the Fair Debt Collection Practices Act (FDCPA). - voice channel",
+    "keywords": [
+      "harass",
+      "threaten",
+      "call relentlessly",
+      "false statement",
+      "illegal collection"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Collector threatened legal action improperly"
+    ]
+  },
+  {
+    "id": "C023-93",
+    "title": "ECOA - Discriminatory Credit Decision - mobile app",
+    "category": "Fair Lending",
+    "description": "Denying credit or treating applicants differently based on protected characteristics violates the Equal Credit Opportunity Act (ECOA). - mobile app",
+    "keywords": [
+      "denied due to",
+      "discriminate",
+      "refused because",
+      "race",
+      "gender"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Applicant was denied credit for improper discriminatory reasons"
+    ]
+  },
+  {
+    "id": "C024-94",
+    "title": "TILA - Failure to Provide Truth-in-Lending Disclosures - web portal",
+    "category": "Regulatory Disclosures",
+    "description": "Failing to disclose APR, finance charges, or other material loan terms violates the Truth in Lending Act (TILA). - web portal",
+    "keywords": [
+      "apr",
+      "finance charge",
+      "truth in lending",
+      "rate not disclosed",
+      "terms not shown"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not provide required APR disclosure"
+    ]
+  },
+  {
+    "id": "C025-95",
+    "title": "GLBA - Improper Handling of Consumer Financial Data - third-party processor",
+    "category": "Data Privacy",
+    "description": "Failure to protect or properly share consumer financial information can violate the Gramm-Leach-Bliley Act (GLBA) and internal privacy policies. - third-party processor",
+    "keywords": [
+      "share data",
+      "sold data",
+      "unauthorized access",
+      "unauthorised",
+      "not recognized",
+      "fraudulent",
+      "suspicious",
+      "privacy policy",
+      "consumer financial information"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer data shared without proper disclosure or consent"
+    ]
+  },
+  {
+    "id": "C026-96",
+    "title": "CARD Act - Inadequate Notice for Rate/Fee Changes - escalated case",
+    "category": "Billing Accuracy",
+    "description": "Credit card customers must receive advance notice for significant rate or fee increases as required by the Credit CARD Act. - escalated case",
+    "keywords": [
+      "rate increase",
+      "fee change",
+      "notice not given",
+      "billing change",
+      "card act"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer was charged increased fees without advance notice"
+    ]
+  },
+  {
+    "id": "C027-97",
+    "title": "CFPB - Unfair or Deceptive Acts (UDAAP) Enforcement - repeated occurrence",
+    "category": "Regulatory",
+    "description": "Practices that are abusive, unfair, or deceptive may trigger CFPB enforcement under UDAAP guidelines. - repeated occurrence",
+    "keywords": [
+      "misleading",
+      "deceptive",
+      "abusive",
+      "not true",
+      "hidden fee"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Promotional language misrepresented actual terms"
+    ]
+  },
+  {
+    "id": "C028-98",
+    "title": "Credit Reporting - Failure to Provide Adverse Action Notice - seasonal spike",
+    "category": "Credit Reporting",
+    "description": "Lenders must provide an adverse action notice when denying credit or taking other adverse actions based on information from credit reports. - seasonal spike",
+    "keywords": [
+      "adverse action",
+      "denial notice",
+      "credit denied",
+      "adverse notice not sent"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied credit but not provided adverse action notice"
+    ]
+  },
+  {
+    "id": "C029-99",
+    "title": "Payment Protection - Failure to Honor Promised Provisional Credits - high-value customer",
+    "category": "Customer Remedies",
+    "description": "When provisional credits are promised pending investigation (e.g., for unauthorized transactions), they must be applied per regulation and internal SLA. - high-value customer",
+    "keywords": [
+      "provisional credit",
+      "promised credit",
+      "not applied",
+      "investigation pending"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Provisional credit promised but not applied"
+    ]
+  },
+  {
+    "id": "C030-100",
+    "title": "FCRA - Furnisher Duty to Investigate - regulatory notice",
+    "category": "Credit Reporting",
+    "description": "Entities that furnish information to credit reporting agencies must investigate consumer disputes, correct inaccurate data, and communicate results as required under the FCRA. - regulatory notice",
+    "keywords": [
+      "furnisher",
+      "investigate dispute",
+      "did not investigate",
+      "correct reporting",
+      "reporting not corrected"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Furnisher failed to investigate consumer dispute within statutory timeframe"
+    ]
+  },
+  {
+    "id": "C031-101",
+    "title": "FCRA - Failure to Provide Adverse Action Based on Credit Report",
+    "category": "Credit Reporting",
+    "description": "When adverse actions (denial, increased rate) are taken based on credit report information, consumers must receive a compliant adverse action notice explaining the decision and source of information.",
+    "keywords": [
+      "adverse action",
+      "credit report",
+      "denial notice",
+      "reason for denial",
+      "based on credit report"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied credit without receiving adverse action notice"
+    ]
+  },
+  {
+    "id": "C032-102",
+    "title": "FCRA - Failure to Block or Correct Identity Theft Records - voice channel",
+    "category": "Identity & Fraud",
+    "description": "When a consumer reports identity theft, furnishers and CRAs must block or correct fraudulent information once validated under FCRA procedures. - voice channel",
+    "keywords": [
+      "identity theft",
+      "fraudulent charge",
+      "block record",
+      "fraud report",
+      "not blocked"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Fraudulent account not blocked after identity theft report"
+    ]
+  },
+  {
+    "id": "C033-103",
+    "title": "CFPB - Failure to Properly Handle Consumer Complaints - mobile app",
+    "category": "Customer Remedies",
+    "description": "Under CFPB guidance, covered firms must maintain effective complaint-handling processes and timely responses to consumer complaints; failures can lead to supervisory action. - mobile app",
+    "keywords": [
+      "complaint not handled",
+      "no response",
+      "did not escalate complaint",
+      "CFPB complaint",
+      "consumer complaint"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Multiple complaints left unaddressed, consumer filed CFPB complaint"
+    ]
+  },
+  {
+    "id": "C034-104",
+    "title": "CFPB - Unfair or Deceptive Practices (UDAAP) in Marketing/Disclosure - web portal",
+    "category": "Regulatory",
+    "description": "Marketing or disclosure practices that mislead consumers about terms, fees, or remedies may constitute unfair or deceptive acts under CFPB enforcement priorities. - web portal",
+    "keywords": [
+      "misleading",
+      "not disclosed",
+      "hidden fee",
+      "bait and switch",
+      "not true"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Promotional claims omitted material fees"
+    ]
+  },
+  {
+    "id": "C035-105",
+    "title": "CFPB - Failure to Maintain Compliance Program / Controls - third-party processor",
+    "category": "Governance",
+    "description": "Lack of adequate training, monitoring, or internal controls for consumer-facing operations can lead to systemic violations and CFPB supervisory actions. - third-party processor",
+    "keywords": [
+      "no training",
+      "no monitoring",
+      "policy not followed",
+      "controls missing",
+      "audit failure"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent repeatedly violated call scripts; training records missing"
+    ]
+  },
+  {
+    "id": "C001-106",
+    "title": "Unauthorized / Fraudulent Charge Handling - escalated case",
+    "category": "Fraud & Dispute",
+    "description": "Transactions reported as unauthorized must be investigated promptly, provisional credit offered when applicable, and card reissued if fraud is confirmed. - escalated case",
+    "keywords": [
+      "unauthorized",
+      "unauthorised",
+      "not recognized",
+      "fraudulent",
+      "suspicious",
+      "fraud",
+      "stolen",
+      "not recognize",
+      "unauth"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent failed to flag suspicious transactions",
+      "No provisional credit offered"
+    ]
+  },
+  {
+    "id": "C002-107",
+    "title": "Repeated Unresolved Complaints - repeated occurrence",
+    "category": "Service Quality",
+    "description": "Customers reporting the same issue multiple times (e.g., 2+ calls) indicate escalation and potential systemic failure. - repeated occurrence",
+    "keywords": [
+      "again",
+      "third call",
+      "multiple times",
+      "still not resolved",
+      "called before"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer reported this is their 3rd call for same issue"
+    ]
+  },
+  {
+    "id": "C003-108",
+    "title": "Payment Processing Failures Affecting Deadlines - seasonal spike",
+    "category": "Payments",
+    "description": "Payment system failures that prevent customers making on-time payments and expose them to late fees must be prioritized. - seasonal spike",
+    "keywords": [
+      "payment failed",
+      "payment processing error",
+      "payment not processed",
+      "transaction failed",
+      "cannot process payment",
+      "unable to pay",
+      "app error",
+      "website crash",
+      "deadline",
+      "due tomorrow",
+      "late fee"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "System outage prevented payment before due date"
+    ]
+  },
+  {
+    "id": "C004-109",
+    "title": "Data Privacy / PII Exposure - high-value customer",
+    "category": "Data Privacy",
+    "description": "Any mention or evidence of personal information exposure (full PAN, SSN, PIN) must trigger privacy incident protocols and possible breach notification. - high-value customer",
+    "keywords": [
+      "last four",
+      "full card number",
+      "ssn",
+      "pin",
+      "leaked",
+      "exposed",
+      "data breach",
+      "card info"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent read full PAN on an unsecured channel"
+    ]
+  },
+  {
+    "id": "C005-110",
+    "title": "Failure to Follow Dispute / Chargeback Procedures - regulatory notice",
+    "category": "Regulatory Procedures",
+    "description": "Agents must follow documented dispute processes; failure can violate card network rules and consumer protection laws. - regulatory notice",
+    "keywords": [
+      "dispute",
+      "chargeback",
+      "filed dispute",
+      "provisional credit",
+      "investigation"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Dispute not submitted within required timeframe"
+    ]
+  },
+  {
+    "id": "C006-111",
+    "title": "Incorrect Fees or Misapplied Charges",
+    "category": "Billing Accuracy",
+    "description": "Customers billed incorrectly (late fees, overlimit fees) must be corrected and credited when in error.",
+    "keywords": [
+      "late fee",
+      "overlimit fee",
+      "charged incorrectly",
+      "wrong amount",
+      "extra charge"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Late fee charged despite on-time payment"
+    ]
+  },
+  {
+    "id": "C007-112",
+    "title": "Failure to Provide Required Disclosures - voice channel",
+    "category": "Regulatory Disclosures",
+    "description": "Regulatory disclosures (rates, terms, fees) must be provided at required touchpoints; omissions are compliance issues. - voice channel",
+    "keywords": [
+      "disclosure",
+      "terms",
+      "apr",
+      "rate",
+      "statement",
+      "not informed"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not disclose APR change"
+    ]
+  },
+  {
+    "id": "C008-113",
+    "title": "Unapproved Account Changes / Upgrades - mobile app",
+    "category": "Authorization & Consent",
+    "description": "Changes to account settings, credit limits, or enrollment must have proper authorization and record of consent. - mobile app",
+    "keywords": [
+      "increase limit",
+      "credit limit increase",
+      "upgrade",
+      "enroll",
+      "without permission",
+      "not authorized"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Limit increased without customer's explicit consent"
+    ]
+  },
+  {
+    "id": "C009-114",
+    "title": "TCPA / Call Consent Violations - web portal",
+    "category": "Communications",
+    "description": "Calling or messaging customers without consent or calling at prohibited times may violate TCPA and similar laws. - web portal",
+    "keywords": [
+      "called after hours",
+      "no consent",
+      "do not call",
+      "robocall",
+      "automated messages"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Contacted customer after DNC registration"
+    ]
+  },
+  {
+    "id": "C010-115",
+    "title": "Misrepresentation or Deceptive Practices (UDAAP) - third-party processor",
+    "category": "Fair Practices",
+    "description": "Any misleading statements about products, fees, or remedies; deceptive promises are violations of UDAAP. - third-party processor",
+    "keywords": [
+      "guarantee",
+      "will fix for sure",
+      "misleading",
+      "false promise",
+      "not true"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent promised expedited refund that was not allowed"
+    ]
+  },
+  {
+    "id": "C011-116",
+    "title": "Failure to Escalate High-Severity Cases - escalated case",
+    "category": "Escalation",
+    "description": "Cases meeting escalation criteria (fraud, severe financial harm, regulatory breach) must be promptly escalated. - escalated case",
+    "keywords": [
+      "supervisor",
+      "escalate",
+      "escalation",
+      "urgent",
+      "manager",
+      "complaint severe"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not escalate when customer threatened legal action"
+    ]
+  },
+  {
+    "id": "C012-117",
+    "title": "Inadequate Recordkeeping / Missing Call Logs - repeated occurrence",
+    "category": "Recordkeeping",
+    "description": "Regulations require accurate records of communications and actions; missing logs hinder audits and investigations. - repeated occurrence",
+    "keywords": [
+      "no record",
+      "no log",
+      "call not recorded",
+      "missing transcript",
+      "deleted"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Call recording unavailable for disputed transaction"
+    ]
+  },
+  {
+    "id": "C013-118",
+    "title": "PCI-DSS Non-Compliance in Voice Channels - seasonal spike",
+    "category": "Security",
+    "description": "Sensitive cardholder data must not be stored or transmitted insecurely; PCI controls must be followed during calls. - seasonal spike",
+    "keywords": [
+      "full card number",
+      "store PAN",
+      "unencrypted",
+      "CVV",
+      "PIN",
+      "card details"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent wrote down full card number in plain text"
+    ]
+  },
+  {
+    "id": "C014-119",
+    "title": "Inadequate KYC / Identity Verification - high-value customer",
+    "category": "Account Security",
+    "description": "Failure to properly verify customer identity before revealing account details or performing sensitive actions. - high-value customer",
+    "keywords": [
+      "verify identity",
+      "security questions",
+      "last four",
+      "mother's maiden name",
+      "did not verify"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent allowed account changes without proper verification"
+    ]
+  },
+  {
+    "id": "C015-120",
+    "title": "Improper Handling of Chargebacks vs Refunds - regulatory notice",
+    "category": "Payments",
+    "description": "Misclassifying consumer complaints as refunds or vice versa can disrupt dispute tracking and violate rules. - regulatory notice",
+    "keywords": [
+      "refund",
+      "chargeback",
+      "credited",
+      "merchant dispute"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Refund issued where dispute process required"
+    ]
+  },
+  {
+    "id": "C016-121",
+    "title": "Breach Notification Delays",
+    "category": "Incident Response",
+    "description": "Delayed notification to affected customers or regulators after a data breach can lead to regulatory penalties.",
+    "keywords": [
+      "breach",
+      "data breach",
+      "leak",
+      "notify",
+      "notification delay"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer informed weeks after confirmed breach"
+    ]
+  },
+  {
+    "id": "C017-122",
+    "title": "Discriminatory Treatment / Fair Lending Issues - voice channel",
+    "category": "Fair Practices",
+    "description": "Differential treatment or denial of services based on protected characteristics may violate fair lending and consumer protection laws. - voice channel",
+    "keywords": [
+      "race",
+      "gender",
+      "discriminate",
+      "denied due to"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied program due to location"
+    ]
+  },
+  {
+    "id": "C018-123",
+    "title": "Failure to Document Customer Consent for Recordings - mobile app",
+    "category": "Privacy",
+    "description": "Recording calls without required consent or failing to record consent is a compliance issue in many jurisdictions. - mobile app",
+    "keywords": [
+      "recording consent",
+      "we record",
+      "consent not obtained",
+      "call recorded"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "No consent recorded before recording call"
+    ]
+  },
+  {
+    "id": "C019-124",
+    "title": "Unauthorized Disclosure of Account Information - web portal",
+    "category": "Privacy",
+    "description": "Discussing account details with unauthorized third parties or in public channels is prohibited. - web portal",
+    "keywords": [
+      "shared with",
+      "third party",
+      "gave info to",
+      "disclosed"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent disclosed account balance to caller without authorization"
+    ]
+  },
+  {
+    "id": "C020-125",
+    "title": "Improper Refund Timing or Communication - third-party processor",
+    "category": "Customer Remedies",
+    "description": "Customers must be clearly advised about timelines for provisional credits and final resolution; false timelines are problematic. - third-party processor",
+    "keywords": [
+      "24 hours",
+      "5-7 business days",
+      "will appear tomorrow",
+      "provisional credit"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Agent promised immediate full refund but process takes longer"
+    ]
+  },
+  {
+    "id": "C021-126",
+    "title": "FCRA - Incorrect Credit Reporting - escalated case",
+    "category": "Credit Reporting",
+    "description": "Failure to correct or investigate inaccurate information reported to credit bureaus in a timely manner may violate the Fair Credit Reporting Act (FCRA). - escalated case",
+    "keywords": [
+      "credit report",
+      "inaccurate",
+      "wrong balance",
+      "reported incorrectly",
+      "dispute not handled"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer disputed an item and reporting not updated"
+    ]
+  },
+  {
+    "id": "C022-127",
+    "title": "FDCPA - Harassment by Debt Collectors - repeated occurrence",
+    "category": "Debt Collection",
+    "description": "Communications that are abusive, misleading, or harassing when collecting debt can violate the Fair Debt Collection Practices Act (FDCPA). - repeated occurrence",
+    "keywords": [
+      "harass",
+      "threaten",
+      "call relentlessly",
+      "false statement",
+      "illegal collection"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Collector threatened legal action improperly"
+    ]
+  },
+  {
+    "id": "C023-128",
+    "title": "ECOA - Discriminatory Credit Decision - seasonal spike",
+    "category": "Fair Lending",
+    "description": "Denying credit or treating applicants differently based on protected characteristics violates the Equal Credit Opportunity Act (ECOA). - seasonal spike",
+    "keywords": [
+      "denied due to",
+      "discriminate",
+      "refused because",
+      "race",
+      "gender"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Applicant was denied credit for improper discriminatory reasons"
+    ]
+  },
+  {
+    "id": "C024-129",
+    "title": "TILA - Failure to Provide Truth-in-Lending Disclosures - high-value customer",
+    "category": "Regulatory Disclosures",
+    "description": "Failing to disclose APR, finance charges, or other material loan terms violates the Truth in Lending Act (TILA). - high-value customer",
+    "keywords": [
+      "apr",
+      "finance charge",
+      "truth in lending",
+      "rate not disclosed",
+      "terms not shown"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not provide required APR disclosure"
+    ]
+  },
+  {
+    "id": "C025-130",
+    "title": "GLBA - Improper Handling of Consumer Financial Data - regulatory notice",
+    "category": "Data Privacy",
+    "description": "Failure to protect or properly share consumer financial information can violate the Gramm-Leach-Bliley Act (GLBA) and internal privacy policies. - regulatory notice",
+    "keywords": [
+      "share data",
+      "sold data",
+      "unauthorized access",
+      "unauthorised",
+      "not recognized",
+      "fraudulent",
+      "suspicious",
+      "privacy policy",
+      "consumer financial information"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer data shared without proper disclosure or consent"
+    ]
+  },
+  {
+    "id": "C026-131",
+    "title": "CARD Act - Inadequate Notice for Rate/Fee Changes",
+    "category": "Billing Accuracy",
+    "description": "Credit card customers must receive advance notice for significant rate or fee increases as required by the Credit CARD Act.",
+    "keywords": [
+      "rate increase",
+      "fee change",
+      "notice not given",
+      "billing change",
+      "card act"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer was charged increased fees without advance notice"
+    ]
+  },
+  {
+    "id": "C027-132",
+    "title": "CFPB - Unfair or Deceptive Acts (UDAAP) Enforcement - voice channel",
+    "category": "Regulatory",
+    "description": "Practices that are abusive, unfair, or deceptive may trigger CFPB enforcement under UDAAP guidelines. - voice channel",
+    "keywords": [
+      "misleading",
+      "deceptive",
+      "abusive",
+      "not true",
+      "hidden fee"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Promotional language misrepresented actual terms"
+    ]
+  },
+  {
+    "id": "C028-133",
+    "title": "Credit Reporting - Failure to Provide Adverse Action Notice - mobile app",
+    "category": "Credit Reporting",
+    "description": "Lenders must provide an adverse action notice when denying credit or taking other adverse actions based on information from credit reports. - mobile app",
+    "keywords": [
+      "adverse action",
+      "denial notice",
+      "credit denied",
+      "adverse notice not sent"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied credit but not provided adverse action notice"
+    ]
+  },
+  {
+    "id": "C029-134",
+    "title": "Payment Protection - Failure to Honor Promised Provisional Credits - web portal",
+    "category": "Customer Remedies",
+    "description": "When provisional credits are promised pending investigation (e.g., for unauthorized transactions), they must be applied per regulation and internal SLA. - web portal",
+    "keywords": [
+      "provisional credit",
+      "promised credit",
+      "not applied",
+      "investigation pending"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Provisional credit promised but not applied"
+    ]
+  },
+  {
+    "id": "C030-135",
+    "title": "FCRA - Furnisher Duty to Investigate - third-party processor",
+    "category": "Credit Reporting",
+    "description": "Entities that furnish information to credit reporting agencies must investigate consumer disputes, correct inaccurate data, and communicate results as required under the FCRA. - third-party processor",
+    "keywords": [
+      "furnisher",
+      "investigate dispute",
+      "did not investigate",
+      "correct reporting",
+      "reporting not corrected"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Furnisher failed to investigate consumer dispute within statutory timeframe"
+    ]
+  },
+  {
+    "id": "C031-136",
+    "title": "FCRA - Failure to Provide Adverse Action Based on Credit Report - escalated case",
+    "category": "Credit Reporting",
+    "description": "When adverse actions (denial, increased rate) are taken based on credit report information, consumers must receive a compliant adverse action notice explaining the decision and source of information. - escalated case",
+    "keywords": [
+      "adverse action",
+      "credit report",
+      "denial notice",
+      "reason for denial",
+      "based on credit report"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied credit without receiving adverse action notice"
+    ]
+  },
+  {
+    "id": "C032-137",
+    "title": "FCRA - Failure to Block or Correct Identity Theft Records - repeated occurrence",
+    "category": "Identity & Fraud",
+    "description": "When a consumer reports identity theft, furnishers and CRAs must block or correct fraudulent information once validated under FCRA procedures. - repeated occurrence",
+    "keywords": [
+      "identity theft",
+      "fraudulent charge",
+      "block record",
+      "fraud report",
+      "not blocked"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Fraudulent account not blocked after identity theft report"
+    ]
+  },
+  {
+    "id": "C033-138",
+    "title": "CFPB - Failure to Properly Handle Consumer Complaints - seasonal spike",
+    "category": "Customer Remedies",
+    "description": "Under CFPB guidance, covered firms must maintain effective complaint-handling processes and timely responses to consumer complaints; failures can lead to supervisory action. - seasonal spike",
+    "keywords": [
+      "complaint not handled",
+      "no response",
+      "did not escalate complaint",
+      "CFPB complaint",
+      "consumer complaint"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Multiple complaints left unaddressed, consumer filed CFPB complaint"
+    ]
+  },
+  {
+    "id": "C034-139",
+    "title": "CFPB - Unfair or Deceptive Practices (UDAAP) in Marketing/Disclosure - high-value customer",
+    "category": "Regulatory",
+    "description": "Marketing or disclosure practices that mislead consumers about terms, fees, or remedies may constitute unfair or deceptive acts under CFPB enforcement priorities. - high-value customer",
+    "keywords": [
+      "misleading",
+      "not disclosed",
+      "hidden fee",
+      "bait and switch",
+      "not true"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Promotional claims omitted material fees"
+    ]
+  },
+  {
+    "id": "C035-140",
+    "title": "CFPB - Failure to Maintain Compliance Program / Controls - regulatory notice",
+    "category": "Governance",
+    "description": "Lack of adequate training, monitoring, or internal controls for consumer-facing operations can lead to systemic violations and CFPB supervisory actions. - regulatory notice",
+    "keywords": [
+      "no training",
+      "no monitoring",
+      "policy not followed",
+      "controls missing",
+      "audit failure"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent repeatedly violated call scripts; training records missing"
+    ]
+  },
+  {
+    "id": "C001-141",
+    "title": "Unauthorized / Fraudulent Charge Handling",
+    "category": "Fraud & Dispute",
+    "description": "Transactions reported as unauthorized must be investigated promptly, provisional credit offered when applicable, and card reissued if fraud is confirmed.",
+    "keywords": [
+      "unauthorized",
+      "unauthorised",
+      "not recognized",
+      "fraudulent",
+      "suspicious",
+      "fraud",
+      "stolen",
+      "not recognize",
+      "unauth"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent failed to flag suspicious transactions",
+      "No provisional credit offered"
+    ]
+  },
+  {
+    "id": "C002-142",
+    "title": "Repeated Unresolved Complaints - voice channel",
+    "category": "Service Quality",
+    "description": "Customers reporting the same issue multiple times (e.g., 2+ calls) indicate escalation and potential systemic failure. - voice channel",
+    "keywords": [
+      "again",
+      "third call",
+      "multiple times",
+      "still not resolved",
+      "called before"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer reported this is their 3rd call for same issue"
+    ]
+  },
+  {
+    "id": "C003-143",
+    "title": "Payment Processing Failures Affecting Deadlines - mobile app",
+    "category": "Payments",
+    "description": "Payment system failures that prevent customers making on-time payments and expose them to late fees must be prioritized. - mobile app",
+    "keywords": [
+      "payment failed",
+      "payment processing error",
+      "payment not processed",
+      "transaction failed",
+      "cannot process payment",
+      "unable to pay",
+      "app error",
+      "website crash",
+      "deadline",
+      "due tomorrow",
+      "late fee"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "System outage prevented payment before due date"
+    ]
+  },
+  {
+    "id": "C004-144",
+    "title": "Data Privacy / PII Exposure - web portal",
+    "category": "Data Privacy",
+    "description": "Any mention or evidence of personal information exposure (full PAN, SSN, PIN) must trigger privacy incident protocols and possible breach notification. - web portal",
+    "keywords": [
+      "last four",
+      "full card number",
+      "ssn",
+      "pin",
+      "leaked",
+      "exposed",
+      "data breach",
+      "card info"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent read full PAN on an unsecured channel"
+    ]
+  },
+  {
+    "id": "C005-145",
+    "title": "Failure to Follow Dispute / Chargeback Procedures - third-party processor",
+    "category": "Regulatory Procedures",
+    "description": "Agents must follow documented dispute processes; failure can violate card network rules and consumer protection laws. - third-party processor",
+    "keywords": [
+      "dispute",
+      "chargeback",
+      "filed dispute",
+      "provisional credit",
+      "investigation"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Dispute not submitted within required timeframe"
+    ]
+  },
+  {
+    "id": "C006-146",
+    "title": "Incorrect Fees or Misapplied Charges - escalated case",
+    "category": "Billing Accuracy",
+    "description": "Customers billed incorrectly (late fees, overlimit fees) must be corrected and credited when in error. - escalated case",
+    "keywords": [
+      "late fee",
+      "overlimit fee",
+      "charged incorrectly",
+      "wrong amount",
+      "extra charge"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Late fee charged despite on-time payment"
+    ]
+  },
+  {
+    "id": "C007-147",
+    "title": "Failure to Provide Required Disclosures - repeated occurrence",
+    "category": "Regulatory Disclosures",
+    "description": "Regulatory disclosures (rates, terms, fees) must be provided at required touchpoints; omissions are compliance issues. - repeated occurrence",
+    "keywords": [
+      "disclosure",
+      "terms",
+      "apr",
+      "rate",
+      "statement",
+      "not informed"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not disclose APR change"
+    ]
+  },
+  {
+    "id": "C008-148",
+    "title": "Unapproved Account Changes / Upgrades - seasonal spike",
+    "category": "Authorization & Consent",
+    "description": "Changes to account settings, credit limits, or enrollment must have proper authorization and record of consent. - seasonal spike",
+    "keywords": [
+      "increase limit",
+      "credit limit increase",
+      "upgrade",
+      "enroll",
+      "without permission",
+      "not authorized"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Limit increased without customer's explicit consent"
+    ]
+  },
+  {
+    "id": "C009-149",
+    "title": "TCPA / Call Consent Violations - high-value customer",
+    "category": "Communications",
+    "description": "Calling or messaging customers without consent or calling at prohibited times may violate TCPA and similar laws. - high-value customer",
+    "keywords": [
+      "called after hours",
+      "no consent",
+      "do not call",
+      "robocall",
+      "automated messages"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Contacted customer after DNC registration"
+    ]
+  },
+  {
+    "id": "C010-150",
+    "title": "Misrepresentation or Deceptive Practices (UDAAP) - regulatory notice",
+    "category": "Fair Practices",
+    "description": "Any misleading statements about products, fees, or remedies; deceptive promises are violations of UDAAP. - regulatory notice",
+    "keywords": [
+      "guarantee",
+      "will fix for sure",
+      "misleading",
+      "false promise",
+      "not true"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent promised expedited refund that was not allowed"
+    ]
+  },
+  {
+    "id": "C011-151",
+    "title": "Failure to Escalate High-Severity Cases",
+    "category": "Escalation",
+    "description": "Cases meeting escalation criteria (fraud, severe financial harm, regulatory breach) must be promptly escalated.",
+    "keywords": [
+      "supervisor",
+      "escalate",
+      "escalation",
+      "urgent",
+      "manager",
+      "complaint severe"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not escalate when customer threatened legal action"
+    ]
+  },
+  {
+    "id": "C012-152",
+    "title": "Inadequate Recordkeeping / Missing Call Logs - voice channel",
+    "category": "Recordkeeping",
+    "description": "Regulations require accurate records of communications and actions; missing logs hinder audits and investigations. - voice channel",
+    "keywords": [
+      "no record",
+      "no log",
+      "call not recorded",
+      "missing transcript",
+      "deleted"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Call recording unavailable for disputed transaction"
+    ]
+  },
+  {
+    "id": "C013-153",
+    "title": "PCI-DSS Non-Compliance in Voice Channels - mobile app",
+    "category": "Security",
+    "description": "Sensitive cardholder data must not be stored or transmitted insecurely; PCI controls must be followed during calls. - mobile app",
+    "keywords": [
+      "full card number",
+      "store PAN",
+      "unencrypted",
+      "CVV",
+      "PIN",
+      "card details"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent wrote down full card number in plain text"
+    ]
+  },
+  {
+    "id": "C014-154",
+    "title": "Inadequate KYC / Identity Verification - web portal",
+    "category": "Account Security",
+    "description": "Failure to properly verify customer identity before revealing account details or performing sensitive actions. - web portal",
+    "keywords": [
+      "verify identity",
+      "security questions",
+      "last four",
+      "mother's maiden name",
+      "did not verify"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent allowed account changes without proper verification"
+    ]
+  },
+  {
+    "id": "C015-155",
+    "title": "Improper Handling of Chargebacks vs Refunds - third-party processor",
+    "category": "Payments",
+    "description": "Misclassifying consumer complaints as refunds or vice versa can disrupt dispute tracking and violate rules. - third-party processor",
+    "keywords": [
+      "refund",
+      "chargeback",
+      "credited",
+      "merchant dispute"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Refund issued where dispute process required"
+    ]
+  },
+  {
+    "id": "C016-156",
+    "title": "Breach Notification Delays - escalated case",
+    "category": "Incident Response",
+    "description": "Delayed notification to affected customers or regulators after a data breach can lead to regulatory penalties. - escalated case",
+    "keywords": [
+      "breach",
+      "data breach",
+      "leak",
+      "notify",
+      "notification delay"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer informed weeks after confirmed breach"
+    ]
+  },
+  {
+    "id": "C017-157",
+    "title": "Discriminatory Treatment / Fair Lending Issues - repeated occurrence",
+    "category": "Fair Practices",
+    "description": "Differential treatment or denial of services based on protected characteristics may violate fair lending and consumer protection laws. - repeated occurrence",
+    "keywords": [
+      "race",
+      "gender",
+      "discriminate",
+      "denied due to"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied program due to location"
+    ]
+  },
+  {
+    "id": "C018-158",
+    "title": "Failure to Document Customer Consent for Recordings - seasonal spike",
+    "category": "Privacy",
+    "description": "Recording calls without required consent or failing to record consent is a compliance issue in many jurisdictions. - seasonal spike",
+    "keywords": [
+      "recording consent",
+      "we record",
+      "consent not obtained",
+      "call recorded"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "No consent recorded before recording call"
+    ]
+  },
+  {
+    "id": "C019-159",
+    "title": "Unauthorized Disclosure of Account Information - high-value customer",
+    "category": "Privacy",
+    "description": "Discussing account details with unauthorized third parties or in public channels is prohibited. - high-value customer",
+    "keywords": [
+      "shared with",
+      "third party",
+      "gave info to",
+      "disclosed"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent disclosed account balance to caller without authorization"
+    ]
+  },
+  {
+    "id": "C020-160",
+    "title": "Improper Refund Timing or Communication - regulatory notice",
+    "category": "Customer Remedies",
+    "description": "Customers must be clearly advised about timelines for provisional credits and final resolution; false timelines are problematic. - regulatory notice",
+    "keywords": [
+      "24 hours",
+      "5-7 business days",
+      "will appear tomorrow",
+      "provisional credit"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Agent promised immediate full refund but process takes longer"
+    ]
+  },
+  {
+    "id": "C021-161",
+    "title": "FCRA - Incorrect Credit Reporting",
+    "category": "Credit Reporting",
+    "description": "Failure to correct or investigate inaccurate information reported to credit bureaus in a timely manner may violate the Fair Credit Reporting Act (FCRA).",
+    "keywords": [
+      "credit report",
+      "inaccurate",
+      "wrong balance",
+      "reported incorrectly",
+      "dispute not handled"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer disputed an item and reporting not updated"
+    ]
+  },
+  {
+    "id": "C022-162",
+    "title": "FDCPA - Harassment by Debt Collectors - voice channel",
+    "category": "Debt Collection",
+    "description": "Communications that are abusive, misleading, or harassing when collecting debt can violate the Fair Debt Collection Practices Act (FDCPA). - voice channel",
+    "keywords": [
+      "harass",
+      "threaten",
+      "call relentlessly",
+      "false statement",
+      "illegal collection"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Collector threatened legal action improperly"
+    ]
+  },
+  {
+    "id": "C023-163",
+    "title": "ECOA - Discriminatory Credit Decision - mobile app",
+    "category": "Fair Lending",
+    "description": "Denying credit or treating applicants differently based on protected characteristics violates the Equal Credit Opportunity Act (ECOA). - mobile app",
+    "keywords": [
+      "denied due to",
+      "discriminate",
+      "refused because",
+      "race",
+      "gender"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Applicant was denied credit for improper discriminatory reasons"
+    ]
+  },
+  {
+    "id": "C024-164",
+    "title": "TILA - Failure to Provide Truth-in-Lending Disclosures - web portal",
+    "category": "Regulatory Disclosures",
+    "description": "Failing to disclose APR, finance charges, or other material loan terms violates the Truth in Lending Act (TILA). - web portal",
+    "keywords": [
+      "apr",
+      "finance charge",
+      "truth in lending",
+      "rate not disclosed",
+      "terms not shown"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not provide required APR disclosure"
+    ]
+  },
+  {
+    "id": "C025-165",
+    "title": "GLBA - Improper Handling of Consumer Financial Data - third-party processor",
+    "category": "Data Privacy",
+    "description": "Failure to protect or properly share consumer financial information can violate the Gramm-Leach-Bliley Act (GLBA) and internal privacy policies. - third-party processor",
+    "keywords": [
+      "share data",
+      "sold data",
+      "unauthorized access",
+      "unauthorised",
+      "not recognized",
+      "fraudulent",
+      "suspicious",
+      "privacy policy",
+      "consumer financial information"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer data shared without proper disclosure or consent"
+    ]
+  },
+  {
+    "id": "C026-166",
+    "title": "CARD Act - Inadequate Notice for Rate/Fee Changes - escalated case",
+    "category": "Billing Accuracy",
+    "description": "Credit card customers must receive advance notice for significant rate or fee increases as required by the Credit CARD Act. - escalated case",
+    "keywords": [
+      "rate increase",
+      "fee change",
+      "notice not given",
+      "billing change",
+      "card act"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer was charged increased fees without advance notice"
+    ]
+  },
+  {
+    "id": "C027-167",
+    "title": "CFPB - Unfair or Deceptive Acts (UDAAP) Enforcement - repeated occurrence",
+    "category": "Regulatory",
+    "description": "Practices that are abusive, unfair, or deceptive may trigger CFPB enforcement under UDAAP guidelines. - repeated occurrence",
+    "keywords": [
+      "misleading",
+      "deceptive",
+      "abusive",
+      "not true",
+      "hidden fee"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Promotional language misrepresented actual terms"
+    ]
+  },
+  {
+    "id": "C028-168",
+    "title": "Credit Reporting - Failure to Provide Adverse Action Notice - seasonal spike",
+    "category": "Credit Reporting",
+    "description": "Lenders must provide an adverse action notice when denying credit or taking other adverse actions based on information from credit reports. - seasonal spike",
+    "keywords": [
+      "adverse action",
+      "denial notice",
+      "credit denied",
+      "adverse notice not sent"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied credit but not provided adverse action notice"
+    ]
+  },
+  {
+    "id": "C029-169",
+    "title": "Payment Protection - Failure to Honor Promised Provisional Credits - high-value customer",
+    "category": "Customer Remedies",
+    "description": "When provisional credits are promised pending investigation (e.g., for unauthorized transactions), they must be applied per regulation and internal SLA. - high-value customer",
+    "keywords": [
+      "provisional credit",
+      "promised credit",
+      "not applied",
+      "investigation pending"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Provisional credit promised but not applied"
+    ]
+  },
+  {
+    "id": "C030-170",
+    "title": "FCRA - Furnisher Duty to Investigate - regulatory notice",
+    "category": "Credit Reporting",
+    "description": "Entities that furnish information to credit reporting agencies must investigate consumer disputes, correct inaccurate data, and communicate results as required under the FCRA. - regulatory notice",
+    "keywords": [
+      "furnisher",
+      "investigate dispute",
+      "did not investigate",
+      "correct reporting",
+      "reporting not corrected"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Furnisher failed to investigate consumer dispute within statutory timeframe"
+    ]
+  },
+  {
+    "id": "C031-171",
+    "title": "FCRA - Failure to Provide Adverse Action Based on Credit Report",
+    "category": "Credit Reporting",
+    "description": "When adverse actions (denial, increased rate) are taken based on credit report information, consumers must receive a compliant adverse action notice explaining the decision and source of information.",
+    "keywords": [
+      "adverse action",
+      "credit report",
+      "denial notice",
+      "reason for denial",
+      "based on credit report"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied credit without receiving adverse action notice"
+    ]
+  },
+  {
+    "id": "C032-172",
+    "title": "FCRA - Failure to Block or Correct Identity Theft Records - voice channel",
+    "category": "Identity & Fraud",
+    "description": "When a consumer reports identity theft, furnishers and CRAs must block or correct fraudulent information once validated under FCRA procedures. - voice channel",
+    "keywords": [
+      "identity theft",
+      "fraudulent charge",
+      "block record",
+      "fraud report",
+      "not blocked"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Fraudulent account not blocked after identity theft report"
+    ]
+  },
+  {
+    "id": "C033-173",
+    "title": "CFPB - Failure to Properly Handle Consumer Complaints - mobile app",
+    "category": "Customer Remedies",
+    "description": "Under CFPB guidance, covered firms must maintain effective complaint-handling processes and timely responses to consumer complaints; failures can lead to supervisory action. - mobile app",
+    "keywords": [
+      "complaint not handled",
+      "no response",
+      "did not escalate complaint",
+      "CFPB complaint",
+      "consumer complaint"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Multiple complaints left unaddressed, consumer filed CFPB complaint"
+    ]
+  },
+  {
+    "id": "C034-174",
+    "title": "CFPB - Unfair or Deceptive Practices (UDAAP) in Marketing/Disclosure - web portal",
+    "category": "Regulatory",
+    "description": "Marketing or disclosure practices that mislead consumers about terms, fees, or remedies may constitute unfair or deceptive acts under CFPB enforcement priorities. - web portal",
+    "keywords": [
+      "misleading",
+      "not disclosed",
+      "hidden fee",
+      "bait and switch",
+      "not true"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Promotional claims omitted material fees"
+    ]
+  },
+  {
+    "id": "C035-175",
+    "title": "CFPB - Failure to Maintain Compliance Program / Controls - third-party processor",
+    "category": "Governance",
+    "description": "Lack of adequate training, monitoring, or internal controls for consumer-facing operations can lead to systemic violations and CFPB supervisory actions. - third-party processor",
+    "keywords": [
+      "no training",
+      "no monitoring",
+      "policy not followed",
+      "controls missing",
+      "audit failure"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent repeatedly violated call scripts; training records missing"
+    ]
+  },
+  {
+    "id": "C001-176",
+    "title": "Unauthorized / Fraudulent Charge Handling - escalated case",
+    "category": "Fraud & Dispute",
+    "description": "Transactions reported as unauthorized must be investigated promptly, provisional credit offered when applicable, and card reissued if fraud is confirmed. - escalated case",
+    "keywords": [
+      "unauthorized",
+      "unauthorised",
+      "not recognized",
+      "fraudulent",
+      "suspicious",
+      "fraud",
+      "stolen",
+      "not recognize",
+      "unauth"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent failed to flag suspicious transactions",
+      "No provisional credit offered"
+    ]
+  },
+  {
+    "id": "C002-177",
+    "title": "Repeated Unresolved Complaints - repeated occurrence",
+    "category": "Service Quality",
+    "description": "Customers reporting the same issue multiple times (e.g., 2+ calls) indicate escalation and potential systemic failure. - repeated occurrence",
+    "keywords": [
+      "again",
+      "third call",
+      "multiple times",
+      "still not resolved",
+      "called before"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer reported this is their 3rd call for same issue"
+    ]
+  },
+  {
+    "id": "C003-178",
+    "title": "Payment Processing Failures Affecting Deadlines - seasonal spike",
+    "category": "Payments",
+    "description": "Payment system failures that prevent customers making on-time payments and expose them to late fees must be prioritized. - seasonal spike",
+    "keywords": [
+      "payment failed",
+      "payment processing error",
+      "payment not processed",
+      "transaction failed",
+      "cannot process payment",
+      "unable to pay",
+      "app error",
+      "website crash",
+      "deadline",
+      "due tomorrow",
+      "late fee"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "System outage prevented payment before due date"
+    ]
+  },
+  {
+    "id": "C004-179",
+    "title": "Data Privacy / PII Exposure - high-value customer",
+    "category": "Data Privacy",
+    "description": "Any mention or evidence of personal information exposure (full PAN, SSN, PIN) must trigger privacy incident protocols and possible breach notification. - high-value customer",
+    "keywords": [
+      "last four",
+      "full card number",
+      "ssn",
+      "pin",
+      "leaked",
+      "exposed",
+      "data breach",
+      "card info"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent read full PAN on an unsecured channel"
+    ]
+  },
+  {
+    "id": "C005-180",
+    "title": "Failure to Follow Dispute / Chargeback Procedures - regulatory notice",
+    "category": "Regulatory Procedures",
+    "description": "Agents must follow documented dispute processes; failure can violate card network rules and consumer protection laws. - regulatory notice",
+    "keywords": [
+      "dispute",
+      "chargeback",
+      "filed dispute",
+      "provisional credit",
+      "investigation"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Dispute not submitted within required timeframe"
+    ]
+  },
+  {
+    "id": "C006-181",
+    "title": "Incorrect Fees or Misapplied Charges",
+    "category": "Billing Accuracy",
+    "description": "Customers billed incorrectly (late fees, overlimit fees) must be corrected and credited when in error.",
+    "keywords": [
+      "late fee",
+      "overlimit fee",
+      "charged incorrectly",
+      "wrong amount",
+      "extra charge"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Late fee charged despite on-time payment"
+    ]
+  },
+  {
+    "id": "C007-182",
+    "title": "Failure to Provide Required Disclosures - voice channel",
+    "category": "Regulatory Disclosures",
+    "description": "Regulatory disclosures (rates, terms, fees) must be provided at required touchpoints; omissions are compliance issues. - voice channel",
+    "keywords": [
+      "disclosure",
+      "terms",
+      "apr",
+      "rate",
+      "statement",
+      "not informed"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not disclose APR change"
+    ]
+  },
+  {
+    "id": "C008-183",
+    "title": "Unapproved Account Changes / Upgrades - mobile app",
+    "category": "Authorization & Consent",
+    "description": "Changes to account settings, credit limits, or enrollment must have proper authorization and record of consent. - mobile app",
+    "keywords": [
+      "increase limit",
+      "credit limit increase",
+      "upgrade",
+      "enroll",
+      "without permission",
+      "not authorized"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Limit increased without customer's explicit consent"
+    ]
+  },
+  {
+    "id": "C009-184",
+    "title": "TCPA / Call Consent Violations - web portal",
+    "category": "Communications",
+    "description": "Calling or messaging customers without consent or calling at prohibited times may violate TCPA and similar laws. - web portal",
+    "keywords": [
+      "called after hours",
+      "no consent",
+      "do not call",
+      "robocall",
+      "automated messages"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Contacted customer after DNC registration"
+    ]
+  },
+  {
+    "id": "C010-185",
+    "title": "Misrepresentation or Deceptive Practices (UDAAP) - third-party processor",
+    "category": "Fair Practices",
+    "description": "Any misleading statements about products, fees, or remedies; deceptive promises are violations of UDAAP. - third-party processor",
+    "keywords": [
+      "guarantee",
+      "will fix for sure",
+      "misleading",
+      "false promise",
+      "not true"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent promised expedited refund that was not allowed"
+    ]
+  },
+  {
+    "id": "C011-186",
+    "title": "Failure to Escalate High-Severity Cases - escalated case",
+    "category": "Escalation",
+    "description": "Cases meeting escalation criteria (fraud, severe financial harm, regulatory breach) must be promptly escalated. - escalated case",
+    "keywords": [
+      "supervisor",
+      "escalate",
+      "escalation",
+      "urgent",
+      "manager",
+      "complaint severe"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not escalate when customer threatened legal action"
+    ]
+  },
+  {
+    "id": "C012-187",
+    "title": "Inadequate Recordkeeping / Missing Call Logs - repeated occurrence",
+    "category": "Recordkeeping",
+    "description": "Regulations require accurate records of communications and actions; missing logs hinder audits and investigations. - repeated occurrence",
+    "keywords": [
+      "no record",
+      "no log",
+      "call not recorded",
+      "missing transcript",
+      "deleted"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Call recording unavailable for disputed transaction"
+    ]
+  },
+  {
+    "id": "C013-188",
+    "title": "PCI-DSS Non-Compliance in Voice Channels - seasonal spike",
+    "category": "Security",
+    "description": "Sensitive cardholder data must not be stored or transmitted insecurely; PCI controls must be followed during calls. - seasonal spike",
+    "keywords": [
+      "full card number",
+      "store PAN",
+      "unencrypted",
+      "CVV",
+      "PIN",
+      "card details"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent wrote down full card number in plain text"
+    ]
+  },
+  {
+    "id": "C014-189",
+    "title": "Inadequate KYC / Identity Verification - high-value customer",
+    "category": "Account Security",
+    "description": "Failure to properly verify customer identity before revealing account details or performing sensitive actions. - high-value customer",
+    "keywords": [
+      "verify identity",
+      "security questions",
+      "last four",
+      "mother's maiden name",
+      "did not verify"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent allowed account changes without proper verification"
+    ]
+  },
+  {
+    "id": "C015-190",
+    "title": "Improper Handling of Chargebacks vs Refunds - regulatory notice",
+    "category": "Payments",
+    "description": "Misclassifying consumer complaints as refunds or vice versa can disrupt dispute tracking and violate rules. - regulatory notice",
+    "keywords": [
+      "refund",
+      "chargeback",
+      "credited",
+      "merchant dispute"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Refund issued where dispute process required"
+    ]
+  },
+  {
+    "id": "C016-191",
+    "title": "Breach Notification Delays",
+    "category": "Incident Response",
+    "description": "Delayed notification to affected customers or regulators after a data breach can lead to regulatory penalties.",
+    "keywords": [
+      "breach",
+      "data breach",
+      "leak",
+      "notify",
+      "notification delay"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer informed weeks after confirmed breach"
+    ]
+  },
+  {
+    "id": "C017-192",
+    "title": "Discriminatory Treatment / Fair Lending Issues - voice channel",
+    "category": "Fair Practices",
+    "description": "Differential treatment or denial of services based on protected characteristics may violate fair lending and consumer protection laws. - voice channel",
+    "keywords": [
+      "race",
+      "gender",
+      "discriminate",
+      "denied due to"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer denied program due to location"
+    ]
+  },
+  {
+    "id": "C018-193",
+    "title": "Failure to Document Customer Consent for Recordings - mobile app",
+    "category": "Privacy",
+    "description": "Recording calls without required consent or failing to record consent is a compliance issue in many jurisdictions. - mobile app",
+    "keywords": [
+      "recording consent",
+      "we record",
+      "consent not obtained",
+      "call recorded"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "No consent recorded before recording call"
+    ]
+  },
+  {
+    "id": "C019-194",
+    "title": "Unauthorized Disclosure of Account Information - web portal",
+    "category": "Privacy",
+    "description": "Discussing account details with unauthorized third parties or in public channels is prohibited. - web portal",
+    "keywords": [
+      "shared with",
+      "third party",
+      "gave info to",
+      "disclosed"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent disclosed account balance to caller without authorization"
+    ]
+  },
+  {
+    "id": "C020-195",
+    "title": "Improper Refund Timing or Communication - third-party processor",
+    "category": "Customer Remedies",
+    "description": "Customers must be clearly advised about timelines for provisional credits and final resolution; false timelines are problematic. - third-party processor",
+    "keywords": [
+      "24 hours",
+      "5-7 business days",
+      "will appear tomorrow",
+      "provisional credit"
+    ],
+    "severity": "Medium",
+    "sample_violations": [
+      "Agent promised immediate full refund but process takes longer"
+    ]
+  },
+  {
+    "id": "C021-196",
+    "title": "FCRA - Incorrect Credit Reporting - escalated case",
+    "category": "Credit Reporting",
+    "description": "Failure to correct or investigate inaccurate information reported to credit bureaus in a timely manner may violate the Fair Credit Reporting Act (FCRA). - escalated case",
+    "keywords": [
+      "credit report",
+      "inaccurate",
+      "wrong balance",
+      "reported incorrectly",
+      "dispute not handled"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer disputed an item and reporting not updated"
+    ]
+  },
+  {
+    "id": "C022-197",
+    "title": "FDCPA - Harassment by Debt Collectors - repeated occurrence",
+    "category": "Debt Collection",
+    "description": "Communications that are abusive, misleading, or harassing when collecting debt can violate the Fair Debt Collection Practices Act (FDCPA). - repeated occurrence",
+    "keywords": [
+      "harass",
+      "threaten",
+      "call relentlessly",
+      "false statement",
+      "illegal collection"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Collector threatened legal action improperly"
+    ]
+  },
+  {
+    "id": "C023-198",
+    "title": "ECOA - Discriminatory Credit Decision - seasonal spike",
+    "category": "Fair Lending",
+    "description": "Denying credit or treating applicants differently based on protected characteristics violates the Equal Credit Opportunity Act (ECOA). - seasonal spike",
+    "keywords": [
+      "denied due to",
+      "discriminate",
+      "refused because",
+      "race",
+      "gender"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Applicant was denied credit for improper discriminatory reasons"
+    ]
+  },
+  {
+    "id": "C024-199",
+    "title": "TILA - Failure to Provide Truth-in-Lending Disclosures - high-value customer",
+    "category": "Regulatory Disclosures",
+    "description": "Failing to disclose APR, finance charges, or other material loan terms violates the Truth in Lending Act (TILA). - high-value customer",
+    "keywords": [
+      "apr",
+      "finance charge",
+      "truth in lending",
+      "rate not disclosed",
+      "terms not shown"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Agent did not provide required APR disclosure"
+    ]
+  },
+  {
+    "id": "C025-200",
+    "title": "GLBA - Improper Handling of Consumer Financial Data - regulatory notice",
+    "category": "Data Privacy",
+    "description": "Failure to protect or properly share consumer financial information can violate the Gramm-Leach-Bliley Act (GLBA) and internal privacy policies. - regulatory notice",
+    "keywords": [
+      "share data",
+      "sold data",
+      "unauthorized access",
+      "unauthorised",
+      "not recognized",
+      "fraudulent",
+      "suspicious",
+      "privacy policy",
+      "consumer financial information"
+    ],
+    "severity": "High",
+    "sample_violations": [
+      "Customer data shared without proper disclosure or consent"
+    ]
+  }
+]

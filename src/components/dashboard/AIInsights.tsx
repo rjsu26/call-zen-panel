@@ -94,44 +94,7 @@ const AlertCard: React.FC<{ alert: Alert }> = ({ alert }) => {
 };
 
 export const AIInsights: React.FC = () => {
-  const [insights, setInsights] = useState<Insight[]>([
-    {
-      id: '1',
-      type: 'recommendation',
-      title: 'Optimize Agent Scheduling',
-      description: 'Peak call volume detected between 1-3 PM. Consider adding 2 more agents during this window.',
-      impact: 'high',
-      confidence: 87,
-      timestamp: '5 min ago'
-    },
-    {
-      id: '2',
-      type: 'trend',
-      title: 'Improving Sentiment Trend',
-      description: 'Customer sentiment has improved by 15% over the past week following agent training.',
-      impact: 'medium',
-      confidence: 92,
-      timestamp: '12 min ago'
-    },
-    {
-      id: '3',
-      type: 'prediction',
-      title: 'Expected Call Volume Spike',
-      description: 'Model predicts 40% increase in calls tomorrow due to new product launch.',
-      impact: 'high',
-      confidence: 78,
-      timestamp: '18 min ago'
-    },
-    {
-      id: '4',
-      type: 'alert',
-      title: 'Resolution Time Increase',
-      description: 'Average resolution time has increased by 25% for transaction disputes.',
-      impact: 'medium',
-      confidence: 95,
-      timestamp: '25 min ago'
-    }
-  ]);
+  const [insights, setInsights] = useState<Insight[]>([]);
 
   const [alerts, setAlerts] = useState<Alert[]>([
     {
@@ -157,24 +120,72 @@ export const AIInsights: React.FC = () => {
     }
   ]);
 
-  // Simulate new insights and alerts
+  // Load case analyses and compliance rules, compute violations and confidence
   useEffect(() => {
-    const interval = setInterval(() => {
-      const newInsightTypes = ['recommendation', 'trend', 'prediction', 'alert'];
-      const newInsight: Insight = {
-        id: Date.now().toString(),
-        type: newInsightTypes[Math.floor(Math.random() * newInsightTypes.length)] as any,
-        title: `AI Generated Insight #${Date.now().toString().slice(-4)}`,
-        description: 'New pattern detected in customer interaction data requiring attention.',
-        impact: ['high', 'medium', 'low'][Math.floor(Math.random() * 3)] as any,
-        confidence: Math.floor(Math.random() * 30) + 70,
-        timestamp: 'Just now'
-      };
+    let mounted = true;
 
-      setInsights(prev => [newInsight, ...prev.slice(0, 3)]);
-    }, 15000);
+    async function loadAndCompute() {
+      try {
+        const [casesRes, rulesRes] = await Promise.all([
+          fetch('/case_analyses.json'),
+          fetch('/data/compliance_rules_2000.json')
+        ]);
 
-    return () => clearInterval(interval);
+        if (!casesRes.ok || !rulesRes.ok) {
+          // If files are not served from root, try relative paths
+          console.warn('Primary fetch failed, trying relative paths');
+        }
+
+        const cases = await casesRes.json();
+        const rules = await rulesRes.json();
+
+        const violations: Insight[] = [];
+
+        // Simple keyword matching: for each case, check rule keywords against caseSummary
+        for (const c of cases) {
+          const text = (c.caseSummary || c.caseSummary || '').toLowerCase();
+          for (const r of rules) {
+            let matchCount = 0;
+            for (const kw of r.keywords || []) {
+              const k = (kw || '').toString().toLowerCase();
+              if (!k) continue;
+              if (text.includes(k)) matchCount++;
+            }
+
+            if (matchCount > 0) {
+              // confidence heuristic
+              let base = 50;
+              base += Math.min(30, matchCount * 8);
+              if ((r.severity || '').toLowerCase() === 'high') base += 15;
+              if ((c.severity || '').toLowerCase() === 'high') base += 10;
+              const confidence = Math.min(99, base);
+
+              const impact = (r.severity || 'medium').toLowerCase() === 'high' ? 'high' : (r.severity || 'medium').toLowerCase() === 'medium' ? 'medium' : 'low';
+
+              violations.push({
+                id: `${c.id}-${r.id}`,
+                type: 'alert',
+                title: `${r.title} — ${c.customerName}`,
+                description: r.description,
+                impact: impact as any,
+                confidence,
+                timestamp: c.timestamp || 'Recently analyzed'
+              });
+            }
+          }
+        }
+
+        // Sort by confidence and impact
+        violations.sort((a, b) => (b.confidence - a.confidence));
+
+        if (mounted) setInsights(violations.slice(0, 6));
+      } catch (e) {
+        console.error('Error loading compliance insights', e);
+      }
+    }
+
+    loadAndCompute();
+    return () => { mounted = false; };
   }, []);
 
   return (
@@ -202,7 +213,7 @@ export const AIInsights: React.FC = () => {
 
       {/* AI Insights */}
       <div>
-        <h3 className="text-lg font-semibold text-foreground mb-4">Latest Insights</h3>
+        <h3 className="text-lg font-semibold text-foreground mb-4">Compliance Insights</h3>
         <div className="space-y-4 max-h-96 overflow-y-auto">
           {insights.map((insight) => (
             <InsightCard key={insight.id} insight={insight} />
