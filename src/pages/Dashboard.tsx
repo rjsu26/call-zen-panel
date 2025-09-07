@@ -8,13 +8,13 @@ export const Dashboard: React.FC = () => {
   console.log('Dashboard component rendering');
   
   return (
-    <div className="min-h-screen p-6" style={{ backgroundColor: '#1a1a1a', color: '#ffffff' }}>
+    <div className="min-h-screen p-6 bg-background text-foreground">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2" style={{ color: '#00ffff' }}>
+        <h1 className="text-3xl font-bold text-foreground mb-2">
           Automated Feedback System
         </h1>
-        <p style={{ color: '#888888' }}>
+        <p className="text-muted-foreground">
           Real-time call analytics and customer service intelligence
         </p>
       </div>
