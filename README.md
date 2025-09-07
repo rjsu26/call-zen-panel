@@ -4,6 +4,8 @@ A comprehensive call center analytics dashboard for monitoring, analyzing, and o
 
 ![FINAL PRESENTATiON](https://github.com/user-attachments/assets/b6adbea5-e0d9-4fc9-8fc5-c48f04a0949b)
 
+Youtube link:  https://youtu.be/vLYaYw-E4sQ
+
 ## Project Overview
 
 Call Zen Panel is a full-stack application designed to help call center managers and analysts gain insights from customer service call transcripts. The system processes call transcripts, extracts key metrics, and presents the data through an intuitive dashboard interface.
