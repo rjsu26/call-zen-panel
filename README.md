@@ -1,8 +1,8 @@
-# Call Zen Panel
+# Automated Feedback System 
 
 A comprehensive call center analytics dashboard for monitoring, analyzing, and optimizing customer service operations.
 
-![Call Zen Panel Dashboard](https://placeholder.com/dashboard-preview.png)
+![FINAL PRESENTATiON](https://github.com/user-attachments/assets/b6adbea5-e0d9-4fc9-8fc5-c48f04a0949b)
 
 ## Project Overview
 
