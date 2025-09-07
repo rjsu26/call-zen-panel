@@ -156,37 +156,95 @@ const CaseDetail: React.FC = () => {
     try {
       setLoading(true);
       
-      // Load case analyses and transcript data in parallel
-      const [analyses, response] = await Promise.all([
-        loadCaseAnalyses(),
-        api.getTranscriptById(parseInt(id))
-      ]);
+      // Load case analyses
+      const analyses = await loadCaseAnalyses();
       
-      const displayCase = mapTranscriptToDisplayCase(response, analyses);
-      setCaseData(displayCase);
-      setError(null);
+      // Find the case analysis by ID
+      const analysis = analyses.find(a => a.id === id);
+      
+      if (analysis) {
+        // Create mock transcript data based on the analysis
+        const mockTranscript: CallTranscript = {
+          id: parseInt(id),
+          customer_name: analysis.customerName,
+          customer_unique_id: analysis.customerId,
+          support_agent_name: analysis.agentName,
+          support_agent_id: `AGT-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`,
+          call_transcript: generateMockTranscript(analysis),
+          overall_satisfaction_score: analysis.sentiment === 'positive' ? 9 : analysis.sentiment === 'negative' ? 3 : 6,
+          category_of_call: getCategoryFromSummary(analysis.caseSummary),
+          call_duration: Math.floor(Math.random() * 15) + 5, // 5-20 minutes
+          call_date_time: analysis.timestamp,
+          call_resolution_status: analysis.severity === 'High' ? 'Resolved' : 'Pending',
+          escalation_level: analysis.severity === 'High' ? 'Level 2' : 'Level 1',
+          follow_up_required: analysis.severity === 'High' ? 'Yes' : 'No',
+          customer_tier: Math.random() > 0.5 ? 'Premium' : 'Standard',
+          issue_severity: analysis.severity,
+          agent_experience_level: 'Senior',
+          customer_previous_contact_count: Math.floor(Math.random() * 5)
+        };
+        
+        const displayCase = mapTranscriptToDisplayCase(mockTranscript, analyses);
+        setCaseData(displayCase);
+        setError(null);
+      } else {
+        // Use fallback mock data if no analysis found
+        const mockCase: CaseDetailProps = {
+          caseId: id,
+          customerId: 'CC789654321',
+          customerName: 'Sarah Mitchell',
+          agentName: 'Marcus Thompson',
+          caseSummary: 'Customer reported unauthorized charges on their credit card. Two unrecognized transactions totaling $217.49 were disputed.',
+          severity: 'High',
+          sentiment: 'positive',
+          fullTranscript: generateMockTranscript({ caseSummary: 'Customer reported unauthorized charges on their credit card. Two unrecognized transactions totaling $217.49 were disputed.', customerName: 'Sarah Mitchell', agentName: 'Marcus Thompson' }),
+          duration: '12:34',
+          timestamp: '2 hours ago',
+          category: 'Fraud Reporting'
+        };
+        setCaseData(mockCase);
+      }
     } catch (err) {
       console.error('Error fetching case data:', err);
       setError('Failed to load case data');
-      
-      // Fallback to mock data if API fails
-      const mockCase: CaseDetailProps = {
-        caseId: id || '1',
-        customerId: 'CC789654321',
-        customerName: 'Sarah Mitchell',
-        agentName: 'Marcus Thompson',
-        caseSummary: 'Customer reported unauthorized charges on their credit card. Two unrecognized transactions totaling $217.49 were disputed.',
-        severity: 'High',
-        sentiment: 'positive',
-        fullTranscript: 'Customer: Hi, I need to report some unauthorized charges on my credit card.\nAgent: I\'m sorry to hear that. I\'ll help you resolve this right away. Can you tell me more about the charges?\nCustomer: There are two transactions I don\'t recognize, totaling $217.49.\nAgent: I understand your concern. Let me flag these transactions for dispute immediately...',
-        duration: '12:34',
-        timestamp: '2 hours ago',
-        category: 'Fraud Reporting'
-      };
-      setCaseData(mockCase);
     } finally {
       setLoading(false);
     }
+  };
+
+  // Helper function to generate mock transcript based on case summary
+  const generateMockTranscript = (analysis: any): string => {
+    const { caseSummary, customerName = 'Customer', agentName = 'Agent' } = analysis;
+    return `${agentName}: Hello, this is ${agentName} from customer service. How can I help you today?
+
+${customerName}: Hi, I need help with an issue I'm experiencing.
+
+${agentName}: I'd be happy to assist you. Can you tell me more about what's happening?
+
+${customerName}: ${caseSummary.split('.')[0]}.
+
+${agentName}: I understand your concern. Let me look into this for you right away.
+
+${customerName}: Thank you, I really appreciate your help.
+
+${agentName}: ${caseSummary.includes('resolved') || caseSummary.includes('completed') ? 'I\'ve been able to resolve this issue for you.' : 'I\'m working on resolving this issue and will follow up with you shortly.'}
+
+${customerName}: That's great, thank you so much for your assistance.
+
+${agentName}: You're welcome! Is there anything else I can help you with today?
+
+${customerName}: No, that covers everything. Thank you again.
+
+${agentName}: Perfect! Have a wonderful day and please don't hesitate to contact us if you need any further assistance.`;
+  };
+
+  // Helper function to determine category from case summary
+  const getCategoryFromSummary = (summary: string): string => {
+    if (summary.toLowerCase().includes('fraud') || summary.toLowerCase().includes('unauthorized')) return 'Fraud Reporting';
+    if (summary.toLowerCase().includes('credit') || summary.toLowerCase().includes('limit')) return 'Account Management';
+    if (summary.toLowerCase().includes('app') || summary.toLowerCase().includes('technical')) return 'Technical Support';
+    if (summary.toLowerCase().includes('payment') || summary.toLowerCase().includes('billing')) return 'Billing';
+    return 'General Inquiry';
   };
 
   useEffect(() => {
